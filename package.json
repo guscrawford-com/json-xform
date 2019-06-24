@@ -1,6 +1,6 @@
 {
   "name": "@guscrawford.com/json-xform",
-  "version": "0.0.1-alpha",
+  "version": "0.0.2-alpha",
   "description": "A json transformer",
   "main": "src/json-xform.ts",
   "license": "MIT",
@@ -16,6 +16,7 @@
   "scripts": {
     "package:json-xform": "cpy README.md dist && cpy CHANGELOG.md dist && cpy package.lib.json dist && renamer --find .lib dist/*.json",
     "build": "rimraf dist && rimraf docs && typedoc --out docs ./src && tsc && yarn package:json-xform",
-    "test": "tsc -p tsconfig.jasmine.json && jasmine \"test/**/*[sS]pec.js\""
+    "test": "tsc -p tsconfig.jasmine.json && jasmine \"test/**/*[sS]pec.js\"",
+    "release":"yarn build && cd dist && yarn publish --access=public"
   }
 }
