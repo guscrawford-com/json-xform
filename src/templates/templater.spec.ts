@@ -5,6 +5,7 @@ describe('Templater',()=>{
     beforeEach(()=>{
         templater = new Templater(
             {
+                "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
                 "@xform:var":{
                     buildScriptName:"build",
                     buildScriptVal:"tsc"
@@ -23,7 +24,11 @@ describe('Templater',()=>{
                 stanza:{
                     a:"a"
                 },
-                stanza2:"stanza2"
+                stanza2:"stanza2",
+                removeThis:"here",
+                remove:{
+                    inner:"here"
+                }
             }
         )
     });
@@ -49,6 +54,11 @@ describe('Templater',()=>{
             let result = templater.parse();
             expect((result as any).scripts['new-build']).toBe('new-tsc');
             expect((result as any)["@xform:merge"]).toBeUndefined();
+        });
+        it('removes items',()=>{
+            let result = templater.parse();
+            expect((result as any).remove.inner).toBeUndefined();
+            expect((result as any).removeThis).toBeUndefined();
         });
     });
 });

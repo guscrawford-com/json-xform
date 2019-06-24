@@ -3,6 +3,7 @@ import { MergeOperation } from "../operations/merge-operation";
 import { Operation } from "../operations/operation";
 import { DEFAULT_FILTERS } from "./default-filters";
 import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
+import { RemoveOperation } from "../operations/remove-operation";
 
 const AWOL = -1;
 
@@ -26,7 +27,8 @@ export interface TemplaterConfig {
     }
 }
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
-    "@xform:merge":(templater:Templater)=> new MergeOperation(templater)
+    "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
+    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
 };
 export class Templater {
 
