@@ -28,16 +28,6 @@ export class Templater {
         if (!templateGraph) templateGraph = {...this.template};
         var graphIsArray = templateGraph instanceof Array;
         var templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
-        // if (!graphIsArray)
-        //     Object.keys(templateGraph).forEach(
-        //         (key:string)=>
-        //             !key.startsWith('@xform:')/* && (
-        //                 !(templateGraph as any)['@xform:remove'] || (
-        //                     (templateGraph as any)['@xform:remove'] &&
-        //                     Object.keys((templateGraph as any)['@xform:remove'] as any).find(k=>k===key)
-        //                 )
-        //             )*/?(templatedGraph as any)[key]=(templateGraph as any)[key]:null
-        //     );
         for (var directiveOrProperty in templateGraph) {
             var resultingKey = this.expression(directiveOrProperty);
             var resultingValue; 
