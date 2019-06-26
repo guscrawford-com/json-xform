@@ -1,20 +1,15 @@
 import 'jasmine';
 import { Templater } from './templater';
 describe('Templater',()=>{
-    let templater:Templater;
+    var templater:Templater;
     beforeEach(()=>{
         templater = new Templater(
             {
-                "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
+                
+                
                 "@xform:var":{
                     buildScriptName:"build",
                     buildScriptVal:"tsc"
-                },
-                "@xform:merge":{
-                    "stanza.a":"A",
-                    "stanza.b":"B",
-                    "stanza2":"Stanza2",
-                    "scripts.new-${buildScriptName}":"new-${buildScriptVal}"
                 },
                 scripts:{
                     "${buildScriptName}":"${buildScriptVal}",
@@ -28,8 +23,15 @@ describe('Templater',()=>{
                 removeThis:"here",
                 remove:{
                     inner:"here"
-                }
-            }
+                },
+                "@xform:merge":{
+                    "stanza.a":"A",
+                    "stanza.b":"B",
+                    "stanza2":"Stanza2",
+                    "scripts.new-${buildScriptName}":"new-${buildScriptVal}"
+                },
+                "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"}
+            } 
         )
     });
     describe('parse',()=>{

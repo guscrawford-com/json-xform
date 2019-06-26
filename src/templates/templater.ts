@@ -4,56 +4,10 @@ import { Operation } from "../operations/operation";
 import { DEFAULT_FILTERS } from "./default-filters";
 import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
 import { RemoveOperation } from "../operations/remove-operation";
+import { TemplaterConfig } from "./template-config.interface";
 
 const AWOL = -1;
 
-/**
- * Configures behavior of a `Templater`
- */
-export interface TemplaterConfig {
-    /**
-     * Controls scaffolding options
-     */
-    scaffolding:{
-        /**
-         * Controls syntax for scaffolding
-         */
-        syntax:{
-            /** The indicator that **scaffolding is open** */
-            open:string;
-            /** The indicator that **scaffolding is finished** */
-            close:string;
-            /**
-             * Controls syntax for filters
-             */
-            filter:{
-                /** The indicator that **filtering is open** */
-                open:string;
-                /** The indicator that **filtering is finished** */
-                close:string;
-                /** The indicator separating **filtering arguments** */
-                delim:string;
-            },
-            /**
-             * Controls syntax for referencing data on JSON objects
-             */
-            reference:{
-                /** The indicator separating **object-property path resolutions** */
-                delim:string;
-            }
-        };
-    };
-    /**
-     * Contains arrow functions used to transform exressions:
-     * `(args:any[])=>any`
-     * Where:
-     * - args[0] is always the instance of the `Templater`
-     * - args[1..] are the delimeter (, by default) separated filter arguments
-     */
-    filters: {
-        [key:string]:(args:any[])=>any
-    }
-}
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
     "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
@@ -72,11 +26,21 @@ export class Templater {
      */
     parse(templateGraph?:Template|Array<any>) {
         if (!templateGraph) templateGraph = {...this.template};
-        let graphIsArray = templateGraph instanceof Array;
-        let templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
-        for (let directiveOrProperty in templateGraph) {
-            let resultingKey = this.expression(directiveOrProperty);
-            let resultingValue; 
+        var graphIsArray = templateGraph instanceof Array;
+        var templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
+        // if (!graphIsArray)
+        //     Object.keys(templateGraph).forEach(
+        //         (key:string)=>
+        //             !key.startsWith('@xform:')/* && (
+        //                 !(templateGraph as any)['@xform:remove'] || (
+        //                     (templateGraph as any)['@xform:remove'] &&
+        //                     Object.keys((templateGraph as any)['@xform:remove'] as any).find(k=>k===key)
+        //                 )
+        //             )*/?(templatedGraph as any)[key]=(templateGraph as any)[key]:null
+        //     );
+        for (var directiveOrProperty in templateGraph) {
+            var resultingKey = this.expression(directiveOrProperty);
+            var resultingValue; 
             switch (typeof (templateGraph as any)[directiveOrProperty]) {
                 case 'string':
                     resultingValue = this.expression((templateGraph as any)[directiveOrProperty]);
@@ -88,8 +52,8 @@ export class Templater {
             }
             if (directiveOrProperty.startsWith("@xform:")) {
                 if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
-                    let operation = OPERATION_MAP[directiveOrProperty](this);
-                    operation.run([templateGraph,(templateGraph as any)[directiveOrProperty]]);
+                    var operation = OPERATION_MAP[directiveOrProperty](this);
+                    operation.run([templatedGraph,resultingValue]);
                 }
             }
             else {
@@ -103,7 +67,6 @@ export class Templater {
         }
         return templatedGraph;
     }
-
 
     expression(exprString:string) {
         let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open);

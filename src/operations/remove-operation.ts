@@ -16,7 +16,9 @@ export class RemoveOperation extends Operation {
                     : target
             );
             let lastRef = refs.slice(refs.length > 1 ?refs.length-2:0).pop() as string;
-            delete removeTarget[lastRef];
+            if (removeTarget)
+                delete removeTarget[lastRef];
         }
+        return target;
     }
 }

@@ -21,6 +21,7 @@ export class MergeOperation extends Operation {
                 ? MergeOperation.deepMerge(mergeTarget[lastRef], merges[mergeOn])
                 : mergeTarget[lastRef] = merges[mergeOn]
         }
+        return target;
     }
     protected static deepMerge(a:any, b:any) {
         for (let prop in a) {

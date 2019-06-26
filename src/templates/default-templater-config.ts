@@ -1,5 +1,5 @@
-import { TemplaterConfig } from "./templater";
 import { DEFAULT_FILTERS } from "./default-filters";
+import { TemplaterConfig } from "./template-config.interface";
 
 export const DEFAULT_TEMPLATE_CONFIG : TemplaterConfig = {
     scaffolding : {
