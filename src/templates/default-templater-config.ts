@@ -1,5 +1,5 @@
-import { TemplaterConfig } from "./templater";
 import { DEFAULT_FILTERS } from "./default-filters";
+import { TemplaterConfig } from "./templater-config.interface";
 
 export const DEFAULT_TEMPLATE_CONFIG : TemplaterConfig = {
     scaffolding : {
@@ -13,6 +13,15 @@ export const DEFAULT_TEMPLATE_CONFIG : TemplaterConfig = {
             },
             reference:{
                 delim:'.'
+            }
+        }
+    },
+    operations:{
+        sort:{
+            syntax:{
+                delim:/\s/,
+                asc:'asc',
+                desc:'desc'
             }
         }
     },

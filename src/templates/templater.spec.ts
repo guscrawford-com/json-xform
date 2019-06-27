@@ -6,6 +6,10 @@ describe('Templater',()=>{
         templater = new Templater(
             {
                 "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
+                "@xform:sort":{
+                    "myArray":"asc",
+                    "myInnerArray.myOtherArray":"key desc"
+                },
                 "@xform:var":{
                     buildScriptName:"build",
                     buildScriptVal:"tsc"
@@ -28,6 +32,19 @@ describe('Templater',()=>{
                 removeThis:"here",
                 remove:{
                     inner:"here"
+                },
+                myArray:[
+                    "z",
+                    "d",
+                    "a",
+                    3
+                ],
+                myInnerArray:{
+                    myOtherArray:[
+                        {key:4},
+                        {key:1},
+                        {key:-7}
+                    ]
                 }
             }
         )
@@ -35,6 +52,12 @@ describe('Templater',()=>{
     describe('parse',()=>{
         it('passes-through static properties and values',()=>{
             let result = templater.parse();
+            expect((result as any).myArray.toString()).toBe([
+                3,
+                "a",
+                "d",
+                "z"
+            ].toString())
             expect((result as any).scripts.test).toBe('jasmine');
         });
         it('evaluates expressions',()=>{
@@ -59,6 +82,20 @@ describe('Templater',()=>{
             let result = templater.parse();
             expect((result as any).remove.inner).toBeUndefined();
             expect((result as any).removeThis).toBeUndefined();
+        });
+        it('sorts items',()=>{
+            let result = templater.parse();
+            expect((result as any).myArray.toString()).toBe([
+                3,
+                "a",
+                "d",
+                "z"
+            ].toString());
+            expect((result as any).myInnerArray.myOtherArray.map((i:any)=>i.key).toString()).toBe([
+                {key:-7},
+                {key:1},
+                {key:4}
+            ].map(i=>i.key).toString());
         });
     });
 });
