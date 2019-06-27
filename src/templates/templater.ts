@@ -4,59 +4,19 @@ import { Operation } from "../operations/operation";
 import { DEFAULT_FILTERS } from "./default-filters";
 import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
 import { RemoveOperation } from "../operations/remove-operation";
+import { TemplaterConfig } from "./templater-config.interface";
+import { SortOperation } from "../operations/sort-operation";
 
 const AWOL = -1;
 
 /**
  * Configures behavior of a `Templater`
  */
-export interface TemplaterConfig {
-    /**
-     * Controls scaffolding options
-     */
-    scaffolding:{
-        /**
-         * Controls syntax for scaffolding
-         */
-        syntax:{
-            /** The indicator that **scaffolding is open** */
-            open:string;
-            /** The indicator that **scaffolding is finished** */
-            close:string;
-            /**
-             * Controls syntax for filters
-             */
-            filter:{
-                /** The indicator that **filtering is open** */
-                open:string;
-                /** The indicator that **filtering is finished** */
-                close:string;
-                /** The indicator separating **filtering arguments** */
-                delim:string;
-            },
-            /**
-             * Controls syntax for referencing data on JSON objects
-             */
-            reference:{
-                /** The indicator separating **object-property path resolutions** */
-                delim:string;
-            }
-        };
-    };
-    /**
-     * Contains arrow functions used to transform exressions:
-     * `(args:any[])=>any`
-     * Where:
-     * - args[0] is always the instance of the `Templater`
-     * - args[1..] are the delimeter (, by default) separated filter arguments
-     */
-    filters: {
-        [key:string]:(args:any[])=>any
-    }
-}
+
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
-    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
+    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater),
+    "@xform:sort":(templater:Templater)=> new SortOperation(templater)
 };
 export class Templater {
 
@@ -153,7 +113,9 @@ export class Templater {
         }
     }
 
-    static deref(obj:any, path:string|string[], delim:string='.'):any {
+    static deref(obj:any, path:string|string[], delim:string|RegExp='.'):any {
+        if (delim instanceof RegExp)
+            delim = delim.toString().replace('/','').replace('\\','');
         if (typeof path === 'string')
             path = path.split(delim);
         if (!obj) return obj;

@@ -9,7 +9,7 @@ export class MergeOperation extends Operation {
         let target = args[0];
         let merges = args[1];
         for (let mergeOn in merges) {
-            let refs = mergeOn.split('.');
+            let refs = mergeOn.split(this.templater.config.scaffolding.syntax.reference.delim);
             let mergeTarget = (
                 refs.length > 1
                     ? Templater.deref(target, refs.slice(0, refs.length-2 || 1))
