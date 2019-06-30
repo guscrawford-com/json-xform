@@ -23,7 +23,10 @@ export class Templater {
     constructor (
         public readonly template:Template,
         public readonly config:TemplaterConfig=DEFAULT_TEMPLATE_CONFIG
-    ) { }
+    ) {
+        if (config.scaffolding.syntax.open[0]===config.scaffolding.syntax.dontInfer[0])
+            throw new Error(`syntax configuration error: config.scaffolding.syntax.open "${config.scaffolding.syntax.open}" may not start with the same character as config.scaffolding.syntax.dontInfer ${config.scaffolding.syntax.dontInfer}\n${JSON.stringify(config.scaffolding.syntax)}`);
+    }
 
     /**
      * Parase a template object
@@ -66,19 +69,23 @@ export class Templater {
 
 
     expression(exprString:string) {
-        let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open);
+        let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open)
+        if (expressionStart === AWOL) expressionStart = exprString.indexOf(this.config.scaffolding.syntax.dontInfer);
         if (expressionStart !== AWOL) {
+            let dontInfer = exprString[expressionStart]===this.config.scaffolding.syntax.dontInfer[0];
             let expressionEnd = exprString.lastIndexOf(this.config.scaffolding.syntax.close);
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
             let filterResult = this.filter(rootExpr);
-            return (
+            let result = (
                 typeof filterResult !== 'object'
-                    ? this.infer(`${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`)
+                    ? `${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`
                     : filterResult
             );
+            if (dontInfer) return result;
+            return this.infer(result);
         }
-        return this.infer(exprString);
+        return exprString;
     }
 
     reference(expr:string):any {

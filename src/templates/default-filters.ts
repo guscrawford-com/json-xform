@@ -23,9 +23,6 @@ export const DEFAULT_FILTERS = {
         let val = parseFloat(numberAsString).toFixed(roundTo);
         return parseFloat(val);
     },
-    string:(args:any[])=>{
-        return args[1].toString();
-    },
     not:(args:any[])=>{
         return !args[1];
     },
