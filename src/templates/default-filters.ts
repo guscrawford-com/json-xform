@@ -23,9 +23,15 @@ export const DEFAULT_FILTERS = {
         let val = parseFloat(numberAsString).toFixed(roundTo);
         return parseFloat(val);
     },
+    string:(args:any[])=>{
+        return args[1].toString();
+    },
+    not:(args:any[])=>{
+        return !args[1];
+    },
     if:(args:any[])=>{
         let templater:Templater = args[0];
-        let conditionExpr = args[1], exprA = args[2], exprB = args[2];
+        let conditionExpr = args[1], exprA = args[2], exprB = args[3];
         return (
             conditionExpr
                 ? exprA
