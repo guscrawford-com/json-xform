@@ -26,6 +26,17 @@ Adds `@xform:remove` operation
 
 ## 0.1.0-beta
 ### Jun 26 2019
-#### Adds remove
+#### Adds sort
 
 Adds `@xform:sort` operation
+
+
+----
+
+## 0.1.1-beta
+### Jun 29 2019
+#### Adds 'filters' and inference of natural JSON types
+
+Adds support for customizable filters:
+ - `if`,`eq`,`lt`, etc.
+ - Returns inferred JSON conversion; i.e. expressions evaluating to 'true' are not stringified
