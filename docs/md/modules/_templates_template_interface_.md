@@ -25,4 +25,4 @@
 
 Ƭ **MergeDirectiveValue**: *"@xform:replace" | "@xform:merge" | "@xform:remove" | "@xform:var"*
 
-*Defined in [templates/template.interface.ts:17](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/template.interface.ts#L17)*
+*Defined in [templates/template.interface.ts:17](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/template.interface.ts#L17)*

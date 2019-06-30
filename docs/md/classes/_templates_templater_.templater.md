@@ -35,7 +35,7 @@
 
 \+ **new Templater**(`template`: *[Template](../interfaces/_templates_template_interface_.template.md)*, `config`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*): *[Templater](_templates_templater_.templater.md)*
 
-*Defined in [templates/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L21)*
+*Defined in [templates/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L21)*
 
 **Parameters:**
 
@@ -52,7 +52,7 @@ Name | Type | Default |
 
 • **config**: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*
 
-*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L25)*
+*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L25)*
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • **template**: *[Template](../interfaces/_templates_template_interface_.template.md)*
 
-*Defined in [templates/templater.ts:24](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L24)*
+*Defined in [templates/templater.ts:24](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L24)*
 
 ## Methods
 
@@ -68,7 +68,7 @@ ___
 
 ▸ **expression**(`exprString`: *string*): *any*
 
-*Defined in [templates/templater.ts:71](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L71)*
+*Defined in [templates/templater.ts:71](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L71)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **filter**(`expr`: *string*): *any*
 
-*Defined in [templates/templater.ts:95](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L95)*
+*Defined in [templates/templater.ts:95](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L95)*
 
 **Parameters:**
 
@@ -100,7 +100,7 @@ ___
 
 ▸ **infer**(`value`: *string*): *any*
 
-*Defined in [templates/templater.ts:130](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L130)*
+*Defined in [templates/templater.ts:130](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L130)*
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **parse**(`templateGraph?`: *[Template](../interfaces/_templates_template_interface_.template.md) | `Array<any>`*): *any[] | object*
 
-*Defined in [templates/templater.ts:36](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L36)*
+*Defined in [templates/templater.ts:36](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L36)*
 
 Parase a template object
 
@@ -136,7 +136,7 @@ ___
 
 ▸ **reference**(`expr`: *string*): *any*
 
-*Defined in [templates/templater.ts:91](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L91)*
+*Defined in [templates/templater.ts:91](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L91)*
 
 **Parameters:**
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **config**(`options`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md) | any*): *object*
 
-*Defined in [templates/templater.ts:140](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L140)*
+*Defined in [templates/templater.ts:140](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L140)*
 
 **Parameters:**
 
@@ -170,7 +170,7 @@ ___
 
 ▸ **deref**(`obj`: *any*, `path`: *string | string[]*, `delim`: *string | `RegExp`*): *any*
 
-*Defined in [templates/templater.ts:151](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.ts#L151)*
+*Defined in [templates/templater.ts:151](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L151)*
 
 **Parameters:**
 

@@ -16,7 +16,7 @@
 
 ▸ **sampleFactory**(): *object*
 
-*Defined in [templates/templater.spec.ts:98](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater.spec.ts#L98)*
+*Defined in [templates/templater.spec.ts:98](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.spec.ts#L98)*
 
 **Returns:** *object*
 
