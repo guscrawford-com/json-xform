@@ -1,4 +1,5 @@
 # 🔀 json-xform
+## 📃 [Docs](./docs/md/README.md)
 
 **@guscrawford.com/json-xform** *JSON Transform*
 
@@ -29,7 +30,7 @@ new Templater({
 **Input**
 
 ```
-{
+....{
   "@xform:remove": {
     "removeThis": "removeThis",
     "removeInnter": "remove.inner"
@@ -64,6 +65,10 @@ new Templater({
   "stanza": {
     "a": "a"
   },
+  "w": 1,
+  "x": "1",
+  "y": "@{varBig}",
+  "z": "${varBig}",
   "stanza2": "stanza2",
   "removeThis": "here",
   "remove": {
@@ -115,6 +120,10 @@ new Templater({
     "a": "A",
     "b": "B"
   },
+  "w": 1,
+  "x": "1",
+  "y": "6",
+  "z": 6,
   "stanza2": "Stanza2",
   "remove": {},
   "myArray": [
