@@ -4,6 +4,7 @@ import { TemplaterConfig } from "./templater-config.interface";
 export const DEFAULT_TEMPLATE_CONFIG : TemplaterConfig = {
     scaffolding : {
         syntax: {
+            dontInfer:'@{',
             open:'${',
             close:'}',
             filter:{

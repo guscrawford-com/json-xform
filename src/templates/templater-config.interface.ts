@@ -7,6 +7,9 @@ export interface TemplaterConfig {
          * Controls syntax for scaffolding
          */
         syntax:{
+            
+            /** The indicator that **scaffolding should not try to infer the result** (i.e. a numeral returned will end-up stringified) ⚠ must **begin** with a different character than standard open symbol*/
+            dontInfer:string;
             /** The indicator that **scaffolding is open** */
             open:string;
             /** The indicator that **scaffolding is finished** */
