@@ -17,7 +17,10 @@ describe('Templater',()=>{
                 "a",
                 "d",
                 "z"
-            ].toString())
+            ].toString());
+            
+            expect((result as any).w).toBe(1);
+            expect((result as any).x).toBe('1');
             expect((result as any).scripts.test).toBe('jasmine');
         });
         it('evaluates expressions',()=>{
@@ -86,6 +89,8 @@ describe('Templater',()=>{
                     withProps:"like this"
                 })
             );
+            expect((result as any).y).toBe('6')
+            expect((result as any).z).toBe(6)
         });
     });
 });
@@ -123,6 +128,10 @@ function sampleFactory () {
         stanza:{
             a:"a"
         },
+        w:1,
+        x:"1",
+        y:"@{varBig}",
+        z:"${varBig}",
         stanza2:"stanza2",
         removeThis:"here",
         remove:{
