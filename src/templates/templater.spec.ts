@@ -4,54 +4,14 @@ describe('Templater',()=>{
     let templater:Templater;
     beforeEach(()=>{
         templater = new Templater(
-            {
-                "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
-                "@xform:sort":{
-                    "myArray":"asc",
-                    "myInnerArray.myOtherArray":"key desc"
-                },
-                "@xform:var":{
-                    buildScriptName:"build",
-                    buildScriptVal:"tsc"
-                },
-                "@xform:merge":{
-                    "stanza.a":"A",
-                    "stanza.b":"B",
-                    "stanza2":"Stanza2",
-                    "scripts.new-${buildScriptName}":"new-${buildScriptVal}"
-                },
-                scripts:{
-                    "${buildScriptName}":"${buildScriptVal}",
-                    "rebuild":"rimraf dist && ${buildScriptVal}",
-                    "test":"jasmine"
-                },
-                stanza:{
-                    a:"a"
-                },
-                stanza2:"stanza2",
-                removeThis:"here",
-                remove:{
-                    inner:"here"
-                },
-                myArray:[
-                    "z",
-                    "d",
-                    "a",
-                    3
-                ],
-                myInnerArray:{
-                    myOtherArray:[
-                        {key:4},
-                        {key:1},
-                        {key:-7}
-                    ]
-                }
-            }
+            sampleFactory()
         )
     });
     describe('parse',()=>{
         it('passes-through static properties and values',()=>{
             let result = templater.parse();
+            console.log(JSON.stringify(sampleFactory(), null, '  '))
+            console.log(JSON.stringify(result, null, '  '))
             expect((result as any).myArray.toString()).toBe([
                 3,
                 "a",
@@ -98,4 +58,98 @@ describe('Templater',()=>{
             ].map(i=>i.key).toString());
         });
     });
+    describe('filter',()=>{
+        it('eq works',()=>{
+            let result = templater.parse();
+            expect((result as any).filtered.shouldBeEqual).toBe(true);
+        });
+        it('gt / lt works',()=>{
+            let result = templater.parse();
+            expect((result as any).filtered.shouldLess).toBe(true);
+            expect((result as any).filtered.shouldMore).toBe(true);
+            expect((result as any).filtered.shouldNotBeLess).toBe(false);
+            expect((result as any).filtered.shouldNotBeMore).toBe(false);
+        });
+        it('if works',()=>{
+            let result = templater.parse();
+            expect(JSON.stringify((result as any).filtered.ifVarBigIsBigger)).toBe(JSON.stringify({
+                anObject:true,
+                withProps:"like this"
+            }));
+            expect((result as any).filtered.ifVarBigIsSmaller).toBe("fore");
+        });
+        it('inference works',()=>{
+            let result = templater.parse();
+            expect(JSON.stringify((result as any).filtered.shouldMaintainObj)).toBe(
+                JSON.stringify({
+                    anObject:true,
+                    withProps:"like this"
+                })
+            );
+        });
+    });
 });
+
+function sampleFactory () {
+    return {
+        "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
+        "@xform:sort":{
+            "myArray":"asc",
+            "myInnerArray.myOtherArray":"key desc"
+        },
+        "@xform:var":{
+            buildScriptName:"build",
+            buildScriptVal:"tsc",
+            varA:"fore",
+            varB:"fore",
+            varC:{
+                anObject:true,
+                withProps:"like this"
+            },
+            varSmall:2,
+            varBig:6
+        },
+        "@xform:merge":{
+            "stanza.a":"A",
+            "stanza.b":"B",
+            "stanza2":"Stanza2",
+            "scripts.new-${buildScriptName}":"new-${buildScriptVal}"
+        },
+        scripts:{
+            "${buildScriptName}":"${buildScriptVal}",
+            "rebuild":"rimraf dist && ${buildScriptVal}",
+            "test":"jasmine"
+        },
+        stanza:{
+            a:"a"
+        },
+        stanza2:"stanza2",
+        removeThis:"here",
+        remove:{
+            inner:"here"
+        },
+        myArray:[
+            "z",
+            "d",
+            "a",
+            3
+        ],
+        myInnerArray:{
+            myOtherArray:[
+                {key:4},
+                {key:1},
+                {key:-7}
+            ]
+        },
+        filtered:{
+            shouldBeEqual:"${eq(varA,varB)}",
+            shouldLess:"${lt(varSmall,varBig)}",
+            shouldMore:"${gt(varBig,varSmall)}",
+            shouldNotBeLess:"${gt(varSmall,varBig)}",
+            shouldNotBeMore:"${lt(varBig,varSmall)}",
+            shouldMaintainObj:"${varC}",
+            ifVarBigIsBigger:"${if(gt(varBig,varSmall),varC,varA)}",
+            ifVarBigIsSmaller:"${if(lt(varBig,varSmall),varC,varA)}"
+        }
+    };
+}
