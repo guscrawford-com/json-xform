@@ -71,9 +71,14 @@ export class Templater {
             let expressionEnd = exprString.lastIndexOf(this.config.scaffolding.syntax.close);
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
-            return `${exprString.substring(0, expressionStart)}${this.filter(rootExpr)}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`;
+            let filterResult = this.filter(rootExpr);
+            return (
+                typeof filterResult !== 'object'
+                    ? this.infer(`${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`)
+                    : filterResult
+            );
         }
-        return exprString;
+        return this.infer(exprString);
     }
 
     reference(expr:string):any {
@@ -92,16 +97,39 @@ export class Templater {
             if (filterFunc) {
                 let args = filterArgs.split(
                     this.config.scaffolding.syntax.filter.delim
-                ).map(
-                    a=>this.filter(a.trim())
                 );
-                args.unshift(this);
-                return filterFunc(args);
+                let groupedArgs:any[] = [], opened = false, groupedArgIndex = 0;
+                args.forEach(preFilteredArg=>{
+                    let opening = preFilteredArg.indexOf(this.config.scaffolding.syntax.filter.open) !== AWOL;
+                    let closing = preFilteredArg.indexOf(this.config.scaffolding.syntax.filter.close) !== AWOL;
+                    if ( opened || opening || closing ) {
+                        if (opening) opened = true;
+                        if (closing) opened = false;
+                    }
+                    if (typeof groupedArgs[groupedArgIndex] === 'undefined') groupedArgs[groupedArgIndex] = "";
+                    groupedArgs[groupedArgIndex] += (!opening&&(opened||closing)?",":"")+preFilteredArg;
+                    if ( !(opened || opening) ) groupedArgIndex ++;
+                });
+                groupedArgs = groupedArgs.map(
+                    a=>this.infer(this.filter(a.trim()))
+                );
+                groupedArgs.unshift(this); // Inject Templater as the first arg on any filter
+                return this.infer(filterFunc(groupedArgs));
             }
         }
         return this.reference(expr);
     }
 
+    infer(value:string):any {
+        if (isNaN(value as any) || isNaN(parseFloat(value))) {
+            switch (value) {
+                case "true":return true;
+                case "false":return false;
+                default: return value;
+            }
+        }
+        else return parseFloat(value);
+    }
     static config(options:TemplaterConfig|any) {
         (options as TemplaterConfig).filters = {
             ... DEFAULT_FILTERS,
