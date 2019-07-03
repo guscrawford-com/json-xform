@@ -36,11 +36,14 @@ new Templater({
 
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
 ....{
   "@xform:remove": {
     "removeThis": "removeThis",
     "removeInnter": "remove.inner"
 =======
+=======
+>>>>>>> develop
 ....
 {
   "@xform:sort":{
@@ -65,6 +68,7 @@ new Templater({
               "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})":"tsc -p ${buildScriptName}/${buildScriptVal}"
           },practicalScripts:{}}
       ]
+<<<<<<< HEAD
   },
   "@xform:merge":{
       "stanza.a":"A",
@@ -94,6 +98,36 @@ new Templater({
       inner:"here"
 >>>>>>> release/1.1.0-beta
   },
+=======
+  },
+  "@xform:merge":{
+      "stanza.a":"A",
+      "stanza.b":"B",
+      "stanza2":"Stanza2",
+      "scripts.new-${buildScriptName}":"new-${buildScriptVal}",
+      "merge.super.deep":'deeper-yet'
+  },
+  otherScripts:{
+      "${buildScriptName}-${buildScriptVal}":"tsc -p ${buildScriptName}/${buildScriptVal}"
+  },
+  scripts:{
+      "${buildScriptName}":"${buildScriptVal}",
+      "rebuild":"rimraf dist && ${buildScriptVal}",
+      "test":"jasmine"
+  },
+  stanza:{
+      a:"a"
+  },
+  w:1,
+  x:"1",
+  y:"@{varBig}",
+  z:"${varBig}",
+  stanza2:"stanza2",
+  removeThis:"here",
+  remove:{
+      inner:"here"
+  },
+>>>>>>> develop
   merge:{
       super:{
       }

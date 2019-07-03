@@ -35,10 +35,14 @@
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *Defined in [operations/sort-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/sort-operation.ts#L4)*
 =======
 *Defined in [operations/sort-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L4)*
 >>>>>>> release/1.1.0-beta
+=======
+*Defined in [operations/sort-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L4)*
+>>>>>>> develop
 
 **Parameters:**
 
@@ -57,10 +61,14 @@ Name | Type |
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *Defined in [operations/sort-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/sort-operation.ts#L5)*
 =======
 *Defined in [operations/sort-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L5)*
 >>>>>>> release/1.1.0-beta
+=======
+*Defined in [operations/sort-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L5)*
+>>>>>>> develop
 
 ## Methods
 
@@ -69,10 +77,14 @@ Name | Type |
 ▸ **doSort**(`objectOrArray`: *object | any[]*, `sortOnRefs`: *string[]*, `asc`: *boolean*): *object*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *Defined in [operations/sort-operation.ts:34](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/sort-operation.ts#L34)*
 =======
 *Defined in [operations/sort-operation.ts:34](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L34)*
 >>>>>>> release/1.1.0-beta
+=======
+*Defined in [operations/sort-operation.ts:34](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L34)*
+>>>>>>> develop
 
 **Parameters:**
 
@@ -93,10 +105,14 @@ ___
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *Defined in [operations/sort-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/sort-operation.ts#L8)*
 =======
 *Defined in [operations/sort-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L8)*
 >>>>>>> release/1.1.0-beta
+=======
+*Defined in [operations/sort-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L8)*
+>>>>>>> develop
 
 **Parameters:**
 
@@ -113,10 +129,14 @@ ___
 ▸ **sortByRef**(`sorting`: *any*, `sortOnRefs`: *string[]*): *any*
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *Defined in [operations/sort-operation.ts:74](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/sort-operation.ts#L74)*
 =======
 *Defined in [operations/sort-operation.ts:74](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L74)*
 >>>>>>> release/1.1.0-beta
+=======
+*Defined in [operations/sort-operation.ts:74](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/sort-operation.ts#L74)*
+>>>>>>> develop
 
 **Parameters:**
 
