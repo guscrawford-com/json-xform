@@ -22,7 +22,7 @@
 
 • **filters**: *object*
 
-*Defined in [templates/templater-config.interface.ts:65](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater-config.interface.ts#L65)*
+*Defined in [templates/templater-config.interface.ts:65](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater-config.interface.ts#L65)*
 
 Contains arrow functions used to transform exressions:
 `(args:any[])=>any`
@@ -48,7 +48,7 @@ ___
 
 • **operations**: *object*
 
-*Defined in [templates/templater-config.interface.ts:40](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater-config.interface.ts#L40)*
+*Defined in [templates/templater-config.interface.ts:40](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater-config.interface.ts#L40)*
 
 Controls Operations related syntax
 
@@ -70,7 +70,7 @@ ___
 
 • **scaffolding**: *object*
 
-*Defined in [templates/templater-config.interface.ts:5](https://github.com/guscrawford-com/json-xform/blob/a58ea1f/src/templates/templater-config.interface.ts#L5)*
+*Defined in [templates/templater-config.interface.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater-config.interface.ts#L5)*
 
 Controls scaffolding options
 

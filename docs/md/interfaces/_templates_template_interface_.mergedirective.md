@@ -4,6 +4,8 @@
 
 # Interface: MergeDirective
 
+Merge properties ex. `{"@xform:merge":{"property.key":"value"}`
+
 ## Hierarchy
 
 * [TemplateDirective](_templates_template_interface_.templatedirective.md)
@@ -13,3 +15,5 @@
 ## Indexable
 
 ● \[▪ **key**: *string*\]: any
+
+Merge properties ex. `{"@xform:merge":{"property.key":"value"}`
