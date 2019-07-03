@@ -16,15 +16,7 @@
 
 ▸ **sampleFactory**(): *object*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.spec.ts:98](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.spec.ts#L98)*
-=======
-*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.spec.ts#L100)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.spec.ts#L100)*
->>>>>>> develop
+*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.spec.ts#L100)*
 
 **Returns:** *object*
 

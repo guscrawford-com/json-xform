@@ -37,15 +37,7 @@
 
 \+ **new Templater**(`template`: *[Template](../interfaces/_templates_template_interface_.template.md)*, `config`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*): *[Templater](_templates_templater_.templater.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L21)*
-=======
-*Defined in [templates/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L22)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L22)*
->>>>>>> develop
+*Defined in [templates/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L22)*
 
 **Parameters:**
 
@@ -62,15 +54,7 @@ Name | Type | Default |
 
 • **config**: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L25)*
-=======
-*Defined in [templates/templater.ts:26](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L26)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:26](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L26)*
->>>>>>> develop
+*Defined in [templates/templater.ts:26](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L26)*
 
 ___
 
@@ -78,15 +62,7 @@ ___
 
 • **template**: *[Template](../interfaces/_templates_template_interface_.template.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:24](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L24)*
-=======
-*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L25)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L25)*
->>>>>>> develop
+*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L25)*
 
 ## Methods
 
@@ -94,7 +70,7 @@ ___
 
 ▸ **anchorDirectives**(`templateGraph`: *[Template](../interfaces/_templates_template_interface_.template.md) | `Array<any>`*): *object*
 
-*Defined in [templates/templater.ts:31](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L31)*
+*Defined in [templates/templater.ts:31](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L31)*
 
 **Parameters:**
 
@@ -110,15 +86,7 @@ ___
 
 ▸ **expression**(`exprString`: *string*, `scope?`: *undefined | object*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:71](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L71)*
-=======
-*Defined in [templates/templater.ts:82](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L82)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:82](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L82)*
->>>>>>> develop
+*Defined in [templates/templater.ts:82](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L82)*
 
 **Parameters:**
 
@@ -135,15 +103,7 @@ ___
 
 ▸ **filter**(`expr`: *string*, `scope?`: *undefined | object*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:95](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L95)*
-=======
-*Defined in [templates/templater.ts:129](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L129)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:129](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L129)*
->>>>>>> develop
+*Defined in [templates/templater.ts:129](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L129)*
 
 **Parameters:**
 
@@ -160,15 +120,7 @@ ___
 
 ▸ **infer**(`value`: *string*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:130](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L130)*
-=======
-*Defined in [templates/templater.ts:164](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L164)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:164](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L164)*
->>>>>>> develop
+*Defined in [templates/templater.ts:164](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L164)*
 
 **Parameters:**
 
@@ -184,15 +136,7 @@ ___
 
 ▸ **parse**(`templateGraph?`: *[Template](../interfaces/_templates_template_interface_.template.md) | `Array<any>` | any*, `scope?`: *undefined | object*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:36](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L36)*
-=======
-*Defined in [templates/templater.ts:45](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L45)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:45](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L45)*
->>>>>>> develop
+*Defined in [templates/templater.ts:45](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L45)*
 
 Parase a template object
 
@@ -213,7 +157,7 @@ ___
 
 ▸ **partialExpression**(`exprString`: *string*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:101](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L101)*
+*Defined in [templates/templater.ts:101](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L101)*
 
 **Parameters:**
 
@@ -230,15 +174,7 @@ ___
 
 ▸ **reference**(`expr`: *string*, `scope?`: *undefined | object*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:91](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L91)*
-=======
-*Defined in [templates/templater.ts:121](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L121)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:121](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L121)*
->>>>>>> develop
+*Defined in [templates/templater.ts:121](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L121)*
 
 **Parameters:**
 
@@ -255,15 +191,7 @@ ___
 
 ▸ **config**(`options`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md) | any*): *object*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:140](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L140)*
-=======
-*Defined in [templates/templater.ts:174](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L174)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:174](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L174)*
->>>>>>> develop
+*Defined in [templates/templater.ts:174](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L174)*
 
 **Parameters:**
 
@@ -281,15 +209,7 @@ ___
 
 ▸ **deref**(`obj`: *any*, `path`: *string | string[]*, `delim`: *string | `RegExp`*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:151](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L151)*
-=======
-*Defined in [templates/templater.ts:185](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L185)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:185](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L185)*
->>>>>>> develop
+*Defined in [templates/templater.ts:185](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L185)*
 
 **Parameters:**
 

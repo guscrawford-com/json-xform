@@ -24,15 +24,7 @@
 
 • **AWOL**: *`-1`* =  -1
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:10](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L10)*
-=======
-*Defined in [templates/templater.ts:11](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L11)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:11](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L11)*
->>>>>>> develop
+*Defined in [templates/templater.ts:11](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L11)*
 
 ## Object literals
 
@@ -40,15 +32,7 @@
 
 ### ▪ **OPERATION_MAP**: *object*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:16](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L16)*
-=======
-*Defined in [templates/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L17)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L17)*
->>>>>>> develop
+*Defined in [templates/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L17)*
 
 Configures behavior of a `Templater`
 
@@ -56,15 +40,7 @@ Configures behavior of a `Templater`
 
 ▸ **@xform:merge**(`templater`: *[Templater](../classes/_templates_templater_.templater.md)*): *[MergeOperation](../classes/_operations_merge_operation_.mergeoperation.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L17)*
-=======
-*Defined in [templates/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L18)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L18)*
->>>>>>> develop
+*Defined in [templates/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L18)*
 
 **Parameters:**
 
@@ -78,15 +54,7 @@ Name | Type |
 
 ▸ **@xform:remove**(`templater`: *[Templater](../classes/_templates_templater_.templater.md)*): *[RemoveOperation](../classes/_operations_remove_operation_.removeoperation.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L18)*
-=======
-*Defined in [templates/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L19)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L19)*
->>>>>>> develop
+*Defined in [templates/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L19)*
 
 **Parameters:**
 
@@ -100,15 +68,7 @@ Name | Type |
 
 ▸ **@xform:sort**(`templater`: *[Templater](../classes/_templates_templater_.templater.md)*): *[SortOperation](../classes/_operations_sort_operation_.sortoperation.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [templates/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.ts#L19)*
-=======
-*Defined in [templates/templater.ts:20](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L20)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [templates/templater.ts:20](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.ts#L20)*
->>>>>>> develop
+*Defined in [templates/templater.ts:20](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.ts#L20)*
 
 **Parameters:**
 

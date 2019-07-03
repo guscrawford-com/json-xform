@@ -34,15 +34,7 @@
 
 \+ **new Operation**(`templater`: *[Templater](_templates_templater_.templater.md)*): *[Operation](_operations_operation_.operation.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L3)*
-=======
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L3)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L3)*
->>>>>>> develop
+*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/operations/operation.ts#L3)*
 
 **Parameters:**
 
@@ -58,15 +50,7 @@ Name | Type |
 
 • **templater**: *[Templater](_templates_templater_.templater.md)*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L4)*
-=======
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L4)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L4)*
->>>>>>> develop
+*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/operations/operation.ts#L4)*
 
 ## Methods
 
@@ -74,15 +58,7 @@ Name | Type |
 
 ▸ **run**(`args`: *any[]*): *any*
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L5)*
-=======
-*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L5)*
->>>>>>> release/1.1.0-beta
-=======
-*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L5)*
->>>>>>> develop
+*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/operations/operation.ts#L5)*
 
 **Parameters:**
 
