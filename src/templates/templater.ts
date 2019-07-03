@@ -6,6 +6,7 @@ import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
 import { RemoveOperation } from "../operations/remove-operation";
 import { TemplaterConfig } from "./templater-config.interface";
 import { SortOperation } from "../operations/sort-operation";
+import { isNullOrUndefined } from "util";
 
 const AWOL = -1;
 
@@ -27,25 +28,35 @@ export class Templater {
         if (config.scaffolding.syntax.open[0]===config.scaffolding.syntax.dontInfer[0])
             throw new Error(`syntax configuration error: config.scaffolding.syntax.open "${config.scaffolding.syntax.open}" may not start with the same character as config.scaffolding.syntax.dontInfer ${config.scaffolding.syntax.dontInfer}\n${JSON.stringify(config.scaffolding.syntax)}`);
     }
-
+    protected anchorDirectives(templateGraph:Template|Array<any>) {
+        if (templateGraph instanceof Array) return templateGraph;
+        let directives = {}, target = {};
+        Object.keys(templateGraph).forEach(key=>(key.startsWith("@xform:")?directives:target as any)[key]=templateGraph[key]);
+        return {
+            ...directives,
+            ...target
+        };
+    }
     /**
      * Parase a template object
      * @param templateGraph The root template object if not provided; or a graph on the template object
      * @returns A version of the template with values resolved and operations completed
      */
-    parse(templateGraph?:Template|Array<any>) {
-        if (!templateGraph) templateGraph = {...this.template};
+    parse(templateGraph?:Template|Array<any>|any, scope?:{[key:string]:any}) {
+        if (typeof templateGraph === 'string') this.expression((templateGraph as string));
+        if (typeof templateGraph !== 'object' && typeof templateGraph !== 'undefined') return templateGraph;
+        templateGraph = this.anchorDirectives(templateGraph || this.template);
         let graphIsArray = templateGraph instanceof Array;
         let templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
         for (let directiveOrProperty in templateGraph) {
-            let resultingKey = this.expression(directiveOrProperty);
+            let resultingKey = this.expression(directiveOrProperty, scope);
             let resultingValue; 
             switch (typeof (templateGraph as any)[directiveOrProperty]) {
                 case 'string':
-                    resultingValue = this.expression((templateGraph as any)[directiveOrProperty]);
+                    resultingValue = this.expression((templateGraph as any)[directiveOrProperty], scope);
                     break;
                 case 'object':
-                    resultingValue = this.parse((templateGraph as any)[directiveOrProperty]);
+                    resultingValue = this.parse((templateGraph as any)[directiveOrProperty], scope);
                     break;
                 default: resultingValue = (templateGraph as any)[directiveOrProperty];
             }
@@ -68,15 +79,34 @@ export class Templater {
     }
 
 
-    expression(exprString:string) {
-        let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open)
+    expression(exprString:string, scope?:{[key:string]:any}) {
+        let result = exprString.split(
+            this.config.scaffolding.syntax.close
+        ).map(expr=>
+            this.partialExpression(
+                expr.indexOf(this.config.scaffolding.syntax.open)!==-1 ||
+                expr.indexOf(this.config.scaffolding.syntax.dontInfer)!==-1
+                    ?`${expr}${this.config.scaffolding.syntax.close}`
+                    :expr,
+                scope
+            )
+        );
+        let nonComposable = result.find(r=>typeof r !== 'string');
+        if (typeof nonComposable !== 'undefined') {
+            return result.shift();
+        }
+        return result.join('');
+    }
+
+    protected partialExpression(exprString:string, scope?:{[key:string]:any}) {
+        let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open);
         if (expressionStart === AWOL) expressionStart = exprString.indexOf(this.config.scaffolding.syntax.dontInfer);
         if (expressionStart !== AWOL) {
             let dontInfer = exprString[expressionStart]===this.config.scaffolding.syntax.dontInfer[0];
             let expressionEnd = exprString.lastIndexOf(this.config.scaffolding.syntax.close);
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
-            let filterResult = this.filter(rootExpr);
+            let filterResult = this.filter(rootExpr, scope);
             let result = (
                 typeof filterResult !== 'object'
                     ? `${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`
@@ -88,11 +118,15 @@ export class Templater {
         return exprString;
     }
 
-    reference(expr:string):any {
-        return Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
+    reference(expr:string, scope?:{[key:string]:any}):any {
+        let scopeRef;
+        if (scope) {
+             scopeRef = Templater.deref(scope, expr, this.config.scaffolding.syntax.reference.delim);
+        }
+        return scopeRef || Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
     }
 
-    filter(expr:string):any {
+    filter(expr:string, scope?:{[key:string]:any}):any {
         let filterArgsStart = expr.indexOf(this.config.scaffolding.syntax.filter.open);
         if (filterArgsStart !== AWOL) {
             let filterArgsStop = expr.lastIndexOf(this.config.scaffolding.syntax.filter.close);
@@ -118,13 +152,13 @@ export class Templater {
                     if ( !(opened || opening) ) groupedArgIndex ++;
                 });
                 groupedArgs = groupedArgs.map(
-                    a=>this.infer(this.filter(a.trim()))
+                    a=>this.infer(this.filter(a.trim(), scope))
                 );
                 groupedArgs.unshift(this); // Inject Templater as the first arg on any filter
                 return this.infer(filterFunc(groupedArgs));
             }
         }
-        return this.reference(expr);
+        return this.reference(expr, scope);
     }
 
     infer(value:string):any {

@@ -34,7 +34,11 @@
 
 \+ **new Operation**(`templater`: *[Templater](_templates_templater_.templater.md)*): *[Operation](_operations_operation_.operation.md)*
 
+<<<<<<< HEAD
 *Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L3)*
+=======
+*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L3)*
+>>>>>>> release/1.1.0-beta
 
 **Parameters:**
 
@@ -50,7 +54,11 @@ Name | Type |
 
 • **templater**: *[Templater](_templates_templater_.templater.md)*
 
+<<<<<<< HEAD
 *Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L4)*
+=======
+*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L4)*
+>>>>>>> release/1.1.0-beta
 
 ## Methods
 
@@ -58,7 +66,11 @@ Name | Type |
 
 ▸ **run**(`args`: *any[]*): *any*
 
+<<<<<<< HEAD
 *Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/operations/operation.ts#L5)*
+=======
+*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L5)*
+>>>>>>> release/1.1.0-beta
 
 **Parameters:**
 

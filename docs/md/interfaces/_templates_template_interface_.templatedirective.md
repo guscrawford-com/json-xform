@@ -8,7 +8,7 @@
 
 * **TemplateDirective**
 
-  * [ReplacementDirective](_templates_template_interface_.replacementdirective.md)
+  * [SortDirective](_templates_template_interface_.sortdirective.md)
 
   * [RuntimeVariablesDirective](_templates_template_interface_.runtimevariablesdirective.md)
 

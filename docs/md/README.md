@@ -3,6 +3,7 @@
 [Globals](globals.md) /
 
 # 🔀 json-xform
+
 ## 📃 [Docs](./docs/md/README.md)
 
 **@guscrawford.com/json-xform** *JSON Transform*
@@ -15,7 +16,7 @@ Manipulate JSON files statically
 
 ## Off the Cuff Example
 
-***⚠ Important: Doesn't work as intended if `@xform:*` directives aren't at beginning***
+***⚠ Important: The `foreach` filter and nested directives are in testing...***
 
 ```
 const Templater = require('@guscrawford.com/json-xform);
@@ -34,11 +35,103 @@ new Templater({
 **Input**
 
 ```
+<<<<<<< HEAD
 ....{
   "@xform:remove": {
     "removeThis": "removeThis",
     "removeInnter": "remove.inner"
+=======
+....
+{
+  "@xform:sort":{
+      "myArray":"asc",
+      "myInnerArray.myOtherArray":"key desc"
   },
+  "@xform:var":{
+      buildScriptName:"build",
+      buildScriptVal:"tsc",
+      varA:"fore",
+      varB:"fore",
+      varC:{
+          anObject:true,
+          withProps:"like this"
+      },
+      varSmall:2,
+      varBig:6,
+      libs:[
+          "ui",
+          "api",
+          {"@xform:merge":{
+              "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})":"tsc -p ${buildScriptName}/${buildScriptVal}"
+          },practicalScripts:{}}
+      ]
+  },
+  "@xform:merge":{
+      "stanza.a":"A",
+      "stanza.b":"B",
+      "stanza2":"Stanza2",
+      "scripts.new-${buildScriptName}":"new-${buildScriptVal}",
+      "merge.super.deep":'deeper-yet'
+  },
+  otherScripts:{
+      "${buildScriptName}-${buildScriptVal}":"tsc -p ${buildScriptName}/${buildScriptVal}"
+  },
+  scripts:{
+      "${buildScriptName}":"${buildScriptVal}",
+      "rebuild":"rimraf dist && ${buildScriptVal}",
+      "test":"jasmine"
+  },
+  stanza:{
+      a:"a"
+  },
+  w:1,
+  x:"1",
+  y:"@{varBig}",
+  z:"${varBig}",
+  stanza2:"stanza2",
+  removeThis:"here",
+  remove:{
+      inner:"here"
+>>>>>>> release/1.1.0-beta
+  },
+  merge:{
+      super:{
+      }
+  },
+  myArray:[
+      "z",
+      "d",
+      "a",
+      3
+  ],
+  myInnerArray:{
+      myOtherArray:[
+          {key:4},
+          {key:1},
+          {key:-7}
+      ]
+  },
+  filtered:{
+      shouldBeEqual:"${eq(varA,varB)}",
+      shouldLess:"${lt(varSmall,varBig)}",
+      shouldMore:"${gt(varBig,varSmall)}",
+      shouldNotBeLess:"${gt(varSmall,varBig)}",
+      shouldNotBeMore:"${lt(varBig,varSmall)}",
+      shouldMaintainObj:"${varC}",
+      ifVarBigIsBigger:"${if(gt(varBig,varSmall),varC,varA)}",
+      ifVarBigIsSmaller:"${if(lt(varBig,varSmall),varC,varA)}"
+  },
+  practicalScripts:{
+      "testEarly":"${foreach(libs)}"
+  },
+  "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"}
+}
+```
+
+**Output**
+
+```
+{
   "@xform:sort": {
     "myArray": "asc",
     "myInnerArray.myOtherArray": "key desc"
@@ -53,13 +146,27 @@ new Templater({
       "withProps": "like this"
     },
     "varSmall": 2,
-    "varBig": 6
+    "varBig": 6,
+    "libs": [
+      "ui",
+      "api",
+      {
+        "@xform:merge": {
+          "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})": "tsc -p ${buildScriptName}/${buildScriptVal}"
+        },
+        "practicalScripts": {}
+      }
+    ]
   },
   "@xform:merge": {
     "stanza.a": "A",
     "stanza.b": "B",
     "stanza2": "Stanza2",
-    "scripts.new-${buildScriptName}": "new-${buildScriptVal}"
+    "scripts.new-${buildScriptName}": "new-${buildScriptVal}",
+    "merge.super.deep": "deeper-yet"
+  },
+  "otherScripts": {
+    "${buildScriptName}-${buildScriptVal}": "tsc -p ${buildScriptName}/${buildScriptVal}"
   },
   "scripts": {
     "${buildScriptName}": "${buildScriptVal}",
@@ -77,6 +184,9 @@ new Templater({
   "removeThis": "here",
   "remove": {
     "inner": "here"
+  },
+  "merge": {
+    "super": {}
   },
   "myArray": [
     "z",
@@ -106,14 +216,19 @@ new Templater({
     "shouldMaintainObj": "${varC}",
     "ifVarBigIsBigger": "${if(gt(varBig,varSmall),varC,varA)}",
     "ifVarBigIsSmaller": "${if(lt(varBig,varSmall),varC,varA)}"
+  },
+  "practicalScripts": {
+    "testEarly": "${foreach(libs)}"
+  },
+  "@xform:remove": {
+    "removeThis": "removeThis",
+    "removeInnter": "remove.inner"
   }
 }
-```
-
-**Output**
-
-```
 {
+  "otherScripts": {
+    "build-tsc": "tsc -p build/tsc"
+  },
   "scripts": {
     "build": "tsc",
     "rebuild": "rimraf dist && tsc",
@@ -130,6 +245,11 @@ new Templater({
   "z": 6,
   "stanza2": "Stanza2",
   "remove": {},
+  "merge": {
+    "super": {
+      "deep": "deeper-yet"
+    }
+  },
   "myArray": [
     3,
     "a",
@@ -164,6 +284,17 @@ new Templater({
       "withProps": "like this"
     },
     "ifVarBigIsSmaller": "fore"
+  },
+  "practicalScripts": {
+    "testEarly": [
+      "ui",
+      "api",
+      {
+        "practicalScripts": {
+          "build-tsc (2)": "tsc -p build/tsc"
+        }
+      }
+    ]
   }
 }
 ```

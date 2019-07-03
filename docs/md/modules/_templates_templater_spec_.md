@@ -16,7 +16,11 @@
 
 ▸ **sampleFactory**(): *object*
 
+<<<<<<< HEAD
 *Defined in [templates/templater.spec.ts:98](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/templater.spec.ts#L98)*
+=======
+*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/templater.spec.ts#L100)*
+>>>>>>> release/1.1.0-beta
 
 **Returns:** *object*
 
@@ -40,6 +44,8 @@
 * **z**: *string* = "${varBig}"
 
 * ### **@xform:merge**: *object*
+
+  * **merge.super.deep**: *string* = "deeper-yet"
 
   * **scripts.new-${buildScriptName}**: *string* = "new-${buildScriptVal}"
 
@@ -66,6 +72,14 @@
   * **buildScriptName**: *string* = "build"
 
   * **buildScriptVal**: *string* = "tsc"
+
+  * **libs**: *string | object[]* = [
+                "ui",
+                "api",
+                {"@xform:merge":{
+                    "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})":"tsc -p ${buildScriptName}/${buildScriptVal}"
+                },practicalScripts:{}}
+            ]
 
   * **varA**: *string* = "fore"
 
@@ -99,6 +113,10 @@
 
   * **shouldNotBeMore**: *string* = "${lt(varBig,varSmall)}"
 
+* ### **merge**: *object*
+
+  * **super**(): *object*
+
 * ### **myInnerArray**: *object*
 
   * **myOtherArray**: *object[]* = [
@@ -106,6 +124,14 @@
                 {key:1},
                 {key:-7}
             ]
+
+* ### **otherScripts**: *object*
+
+  * **${buildScriptName}-${buildScriptVal}**: *string* = "tsc -p ${buildScriptName}/${buildScriptVal}"
+
+* ### **practicalScripts**: *object*
+
+  * **testEarly**: *string* = "${foreach(libs)}"
 
 * ### **remove**: *object*
 

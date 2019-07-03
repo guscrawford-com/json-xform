@@ -4,6 +4,8 @@
 
 # Interface: RemovalDirective
 
+Remove properties ex. `{"@xform:remove":"property.key"}`
+
 ## Hierarchy
 
 * [TemplateDirective](_templates_template_interface_.templatedirective.md)
@@ -13,3 +15,5 @@
 ## Indexable
 
 ● \[▪ **key**: *string*\]: any
+
+Remove properties ex. `{"@xform:remove":"property.key"}`

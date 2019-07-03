@@ -10,8 +10,8 @@
 
 * [MergeDirective](../interfaces/_templates_template_interface_.mergedirective.md)
 * [RemovalDirective](../interfaces/_templates_template_interface_.removaldirective.md)
-* [ReplacementDirective](../interfaces/_templates_template_interface_.replacementdirective.md)
 * [RuntimeVariablesDirective](../interfaces/_templates_template_interface_.runtimevariablesdirective.md)
+* [SortDirective](../interfaces/_templates_template_interface_.sortdirective.md)
 * [Template](../interfaces/_templates_template_interface_.template.md)
 * [TemplateDirective](../interfaces/_templates_template_interface_.templatedirective.md)
 
@@ -25,4 +25,8 @@
 
 Ƭ **MergeDirectiveValue**: *"@xform:replace" | "@xform:merge" | "@xform:remove" | "@xform:var"*
 
+<<<<<<< HEAD
 *Defined in [templates/template.interface.ts:17](https://github.com/guscrawford-com/json-xform/blob/bfbdcca/src/templates/template.interface.ts#L17)*
+=======
+*Defined in [templates/template.interface.ts:25](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/templates/template.interface.ts#L25)*
+>>>>>>> release/1.1.0-beta
