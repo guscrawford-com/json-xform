@@ -4,7 +4,7 @@ describe('Templater',()=>{
     let templater:Templater;
     beforeEach(()=>{
         templater = new Templater(
-            sampleFactory()
+            sampleFactory() as any
         )
     });
     describe('parse',()=>{
@@ -28,6 +28,7 @@ describe('Templater',()=>{
             expect((result as any).scripts.build).toBe('tsc');
             expect((result as any).scripts.rebuild).toBe('rimraf dist && tsc');
             expect((result as any)["@xform:var"]).toBeUndefined();
+            expect((result as any).otherScripts["build-tsc"]).toBe("tsc -p build/tsc")
         });
         it('merges',()=>{
             let result = templater.parse();
@@ -35,6 +36,7 @@ describe('Templater',()=>{
             expect((result as any).stanza.b).toBe('B');
             expect((result as any).stanza2).toBe('Stanza2');
             expect((result as any)["@xform:merge"]).toBeUndefined();
+            expect((result as any).merge.super.deep).toBe('deeper-yet');
         });
         it('evalues expressions, then merges',()=>{
             let result = templater.parse();
@@ -97,7 +99,6 @@ describe('Templater',()=>{
 
 function sampleFactory () {
     return {
-        "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
         "@xform:sort":{
             "myArray":"asc",
             "myInnerArray.myOtherArray":"key desc"
@@ -112,13 +113,24 @@ function sampleFactory () {
                 withProps:"like this"
             },
             varSmall:2,
-            varBig:6
+            varBig:6,
+            libs:[
+                "ui",
+                "api",
+                {"@xform:merge":{
+                    "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})":"tsc -p ${buildScriptName}/${buildScriptVal}"
+                },practicalScripts:{}}
+            ]
         },
         "@xform:merge":{
             "stanza.a":"A",
             "stanza.b":"B",
             "stanza2":"Stanza2",
-            "scripts.new-${buildScriptName}":"new-${buildScriptVal}"
+            "scripts.new-${buildScriptName}":"new-${buildScriptVal}",
+            "merge.super.deep":'deeper-yet'
+        },
+        otherScripts:{
+            "${buildScriptName}-${buildScriptVal}":"tsc -p ${buildScriptName}/${buildScriptVal}"
         },
         scripts:{
             "${buildScriptName}":"${buildScriptVal}",
@@ -136,6 +148,10 @@ function sampleFactory () {
         removeThis:"here",
         remove:{
             inner:"here"
+        },
+        merge:{
+            super:{
+            }
         },
         myArray:[
             "z",
@@ -159,6 +175,10 @@ function sampleFactory () {
             shouldMaintainObj:"${varC}",
             ifVarBigIsBigger:"${if(gt(varBig,varSmall),varC,varA)}",
             ifVarBigIsSmaller:"${if(lt(varBig,varSmall),varC,varA)}"
-        }
+        },
+        practicalScripts:{
+            "testEarly":"${foreach(libs)}"
+        },
+        "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"}
     };
 }

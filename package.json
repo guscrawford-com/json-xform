@@ -5,6 +5,7 @@
   "main": "src/json-xform.ts",
   "license": "MIT",
   "repository": "https://github.com/guscrawford-com/json-xform",
+  "keywords": ["JSON","transform","template","static"],
   "devDependencies": {
     "@types/jasmine": "^3.3.13",
     "cpy-cli": "^2.0.0",
