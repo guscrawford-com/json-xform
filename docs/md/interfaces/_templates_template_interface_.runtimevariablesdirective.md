@@ -4,6 +4,8 @@
 
 # Interface: RuntimeVariablesDirective
 
+Create variables from properties ex. `{"@xform:var":"property.key"}`
+
 ## Hierarchy
 
 * [TemplateDirective](_templates_template_interface_.templatedirective.md)
@@ -13,3 +15,5 @@
 ## Indexable
 
 ● \[▪ **key**: *string*\]: any
+
+Create variables from properties ex. `{"@xform:var":"property.key"}`

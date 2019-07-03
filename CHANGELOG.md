@@ -49,3 +49,14 @@ Adds support for customizable filters:
 #### Adds optional inference of natural JSON types; deprecates 0.1.1-beta
 
 Adds support for optional non-inference of expression results; `@{ref}`
+
+
+----
+
+## 1.1.0-beta
+### Jul 2 2019
+#### Fix bugs, add experimental loops
+
+- Fix bugs deep merging
+- Fix multiple expressions in one key or value
+- Add experimental loops
