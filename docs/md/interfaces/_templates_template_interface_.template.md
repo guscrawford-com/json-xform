@@ -27,7 +27,7 @@
 
 • **@xform:merge**? : *[MergeDirective](_templates_template_interface_.mergedirective.md)*
 
-*Defined in [templates/template.interface.ts:29](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/template.interface.ts#L29)*
+*Defined in [templates/template.interface.ts:29](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/template.interface.ts#L29)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **@xform:remove**? : *[RemovalDirective](_templates_template_interface_.removaldirective.md)*
 
-*Defined in [templates/template.interface.ts:30](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/template.interface.ts#L30)*
+*Defined in [templates/template.interface.ts:30](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/template.interface.ts#L30)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • **@xform:sort**? : *[SortDirective](_templates_template_interface_.sortdirective.md)*
 
-*Defined in [templates/template.interface.ts:28](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/template.interface.ts#L28)*
+*Defined in [templates/template.interface.ts:28](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/template.interface.ts#L28)*
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 • **@xform:var**? : *[RuntimeVariablesDirective](_templates_template_interface_.runtimevariablesdirective.md)*
 
-*Defined in [templates/template.interface.ts:31](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/template.interface.ts#L31)*
+*Defined in [templates/template.interface.ts:31](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/template.interface.ts#L31)*

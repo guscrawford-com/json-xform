@@ -16,7 +16,7 @@
 
 ▸ **sampleFactory**(): *object*
 
-*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/33aecff/src/templates/templater.spec.ts#L100)*
+*Defined in [templates/templater.spec.ts:100](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.spec.ts#L100)*
 
 **Returns:** *object*
 
@@ -38,6 +38,14 @@
 * **y**: *string* = "@{varBig}"
 
 * **z**: *string* = "${varBig}"
+
+* ### **@xform:extends**: *object*
+
+  * **filename**: *object*
+
+    * **@xform:merge**: *object*
+
+      * **thisn**: *string* = "that"
 
 * ### **@xform:merge**: *object*
 

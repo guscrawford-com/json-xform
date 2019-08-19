@@ -50,7 +50,6 @@ Adds support for customizable filters:
 
 Adds support for optional non-inference of expression results; `@{ref}`
 
-
 ----
 
 ## 1.1.0-beta
@@ -60,3 +59,13 @@ Adds support for optional non-inference of expression results; `@{ref}`
 - Fix bugs deep merging
 - Fix multiple expressions in one key or value
 - Add experimental loops
+
+----
+
+## 1.2.0
+### Aug 19 2019
+#### Fix call-stack overflow templating JSON with null values
+
+Fix bug where max call-stack when parsing JSON with null values in it
+
+Also adds experimental "extends" support

@@ -1,13 +1,19 @@
 {
   "name": "@guscrawford.com/json-xform",
-  "version": "1.1.0-beta",
+  "version": "1.2.0",
   "description": "A json transformer",
   "main": "src/json-xform.ts",
   "license": "MIT",
   "repository": "https://github.com/guscrawford-com/json-xform",
-  "keywords": ["JSON","transform","template","static"],
+  "keywords": [
+    "JSON",
+    "transform",
+    "template",
+    "static"
+  ],
   "devDependencies": {
     "@types/jasmine": "^3.3.13",
+    "@types/node": "^8",
     "cpy-cli": "^2.0.0",
     "jasmine": "^3.4.0",
     "renamer": "^1.1.2",
@@ -17,8 +23,8 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "docs":"yarn docs:markdown && yarn docs:html",
-    "docs:markdown":"rimraf docs/md && typedoc ./src --theme markdown --out docs/md",
+    "docs": "yarn docs:markdown && yarn docs:html",
+    "docs:markdown": "rimraf docs/md && typedoc ./src --theme markdown --out docs/md",
     "docs:html": "rimraf docs/html && typedoc ./src --out docs/html",
     "package": "yarn docs && yarn build && cpy README.md dist && cpy CHANGELOG.md dist && cpy package.lib.json dist && renamer --find .lib dist/*.json",
     "build": "rimraf dist && tsc",
