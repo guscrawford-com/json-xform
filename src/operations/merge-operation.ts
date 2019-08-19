@@ -16,13 +16,12 @@ export class MergeOperation extends Operation {
                     : target
             );
             let lastRef = refs.slice(refs.length > 1 ?refs.length-2:0).pop() as string;
-            let setTarget = (val:any)=>mergeTarget[lastRef] = val;
             typeof mergeTarget[lastRef] === 'object' && typeof merges[mergeOn] === 'object'
                 ? MergeOperation.deepMerge(mergeTarget[lastRef], merges[mergeOn])
                 : mergeTarget[lastRef] = merges[mergeOn]
         }
     }
-    protected static deepMerge(a:any, b:any) {
+    public static deepMerge(a:any, b:any) {
         for (let prop in a) {
             switch (typeof a[prop]) {
                 case 'object':

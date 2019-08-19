@@ -179,6 +179,13 @@ function sampleFactory () {
         practicalScripts:{
             "testEarly":"${foreach(libs)}"
         },
-        "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"}
+        "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
+        "@xform:extends":{/*could be a string or an array of filenames and no operations*/
+            "filename":{
+                "@xform:merge":{
+                    "thisn":"that"
+                }
+            }
+        }
     };
 }

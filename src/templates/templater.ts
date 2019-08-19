@@ -6,7 +6,6 @@ import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
 import { RemoveOperation } from "../operations/remove-operation";
 import { TemplaterConfig } from "./templater-config.interface";
 import { SortOperation } from "../operations/sort-operation";
-import { isNullOrUndefined } from "util";
 
 const AWOL = -1;
 
@@ -56,7 +55,9 @@ export class Templater {
                     resultingValue = this.expression((templateGraph as any)[directiveOrProperty], scope);
                     break;
                 case 'object':
-                    resultingValue = this.parse((templateGraph as any)[directiveOrProperty], scope);
+                    resultingValue = (templateGraph as any)[directiveOrProperty]
+                        ? this.parse((templateGraph as any)[directiveOrProperty], scope)
+                        : (templateGraph as any)[directiveOrProperty];
                     break;
                 default: resultingValue = (templateGraph as any)[directiveOrProperty];
             }

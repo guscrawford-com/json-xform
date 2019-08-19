@@ -49,3 +49,21 @@ Adds support for customizable filters:
 #### Adds optional inference of natural JSON types; deprecates 0.1.1-beta
 
 Adds support for optional non-inference of expression results; `@{ref}`
+
+----
+
+## 1.1.0-beta
+### Jul 3 2019
+#### Fix bugs with deep merge
+
+Fixes bugs doing a deep merge nested beyond the first level
+
+----
+
+## 1.2.0
+### Aug 19 2019
+#### Fix call-stack overflow templating JSON with null values
+
+Fix bug where max call-stack when parsing JSON with null values in it
+
+Also adds experimental "extends" support
