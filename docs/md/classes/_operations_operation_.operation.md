@@ -14,6 +14,8 @@
 
   * [MergeOperation](_operations_merge_operation_.mergeoperation.md)
 
+  * [ExtendsOperation](_operations_extends_operation_.extendsoperation.md)
+
 ### Index
 
 #### Constructors
@@ -34,7 +36,7 @@
 
 \+ **new Operation**(`templater`: *[Templater](_templates_templater_.templater.md)*): *[Operation](_operations_operation_.operation.md)*
 
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L3)*
+*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/operations/operation.ts#L3)*
 
 **Parameters:**
 
@@ -50,7 +52,7 @@ Name | Type |
 
 • **templater**: *[Templater](_templates_templater_.templater.md)*
 
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L4)*
+*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/operations/operation.ts#L4)*
 
 ## Methods
 
@@ -58,7 +60,7 @@ Name | Type |
 
 ▸ **run**(`args`: *any[]*): *any*
 
-*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/15c4a14/src/operations/operation.ts#L5)*
+*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/operations/operation.ts#L5)*
 
 **Parameters:**
 
