@@ -62,6 +62,11 @@ describe('Templater',()=>{
                 {key:4}
             ].map(i=>i.key).toString());
         });
+        fit('extends other files',()=>{
+            let result = templater.parse();
+            console.info(result);
+            expect((result as any)['extended-properties']).toBe('work');
+        });
     });
     describe('filter',()=>{
         it('eq works',()=>{
@@ -181,11 +186,7 @@ function sampleFactory () {
         },
         "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
         "@xform:extends":{/*could be a string or an array of filenames and no operations*/
-            "filename":{
-                "@xform:merge":{
-                    "thisn":"that"
-                }
-            }
+            "0":"sample.json"
         }
     };
 }

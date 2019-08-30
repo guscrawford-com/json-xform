@@ -1,16 +1,17 @@
 import { Templater } from "../templates/templater";
 import { Operation } from "./operation";
 import { MergeOperation } from "./merge-operation";
-const { readFileAsync } = require("fs");
-const { join } = require("path");
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export class ExtendsOperation extends Operation {
     constructor (protected templater:Templater) {
         super (templater);
     }
     run(args:any[]) {
-        let target = args[0];
-        let extentsions = args[1];
+        const templater = this.templater;
+        const target = args[0];
+        const extentsions = args[1];
         /*
         "@xform:extends":{//could be a string or an array of filenames and no operations
             "filename":{
@@ -20,23 +21,24 @@ export class ExtendsOperation extends Operation {
             }
         }
          */
-        if (typeof extentsions === 'string') ExtendsOperation.extend(target, extentsions);
+        if (typeof extentsions === 'string') ExtendsOperation.extend(target, join(templater.workingDirectory,extentsions));
         else for (let extension in extentsions) {
             var extensionPath = extentsions[extension];
             (function(extensionPath:string){
-                ExtendsOperation.extend(target, extensionPath);
-            })(extensionPath)
+                ExtendsOperation.extend(target, join(templater.workingDirectory,extensionPath));
+            })(extensionPath);
         }
+        //console.info(target)
     }
     public static extend(target:any, pathRef:string) {
         var source, parsed;
         try {
-            source = readFileAsync(join(process.cwd(),pathRef));
+            source = `${readFileSync(pathRef)}`;
             parsed = JSON.parse(source);
         }
         catch (err) {
             console.warn(err);
         }
-        if (parsed) MergeOperation.deepMerge(target, parsed)
+        if (parsed) MergeOperation.deepMerge(target, parsed);
     }
 }

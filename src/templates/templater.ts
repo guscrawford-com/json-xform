@@ -6,38 +6,85 @@ import { DEFAULT_TEMPLATE_CONFIG } from "./default-templater-config";
 import { RemoveOperation } from "../operations/remove-operation";
 import { TemplaterConfig } from "./templater-config.interface";
 import { SortOperation } from "../operations/sort-operation";
+import { ExtendsOperation } from "../operations/extends-operation";
 
 const AWOL = -1;
 
 /**
- * Configures behavior of a `Templater`
+ * Map `Operation`s to object properites that are "directives" read (in order of mapping) by the `Templater`
  */
-
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
+    "@xform:extends":(templater:Templater)=> new ExtendsOperation(templater),
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
-    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater),
-    "@xform:sort":(templater:Templater)=> new SortOperation(templater)
+    "@xform:sort":(templater:Templater)=> new SortOperation(templater),
+    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
 };
 export class Templater {
 
+    /**
+     * 
+     * @param template A root object to look for `@xform:*` directive-properties on; and tranform accordingly
+     * @param config *(optional)* A table of settings used to customize templating options (see `DEFAULT_TEMPLATE_CONFIG`)
+     * @param workingDirectory *(optional)* A path (`process.cwd()` by default) to start from when resolving any filepath reference in the template
+     */
     constructor (
         public readonly template:Template,
-        public readonly config:TemplaterConfig=DEFAULT_TEMPLATE_CONFIG
+        public readonly config:TemplaterConfig=DEFAULT_TEMPLATE_CONFIG,
+        public readonly workingDirectory:string=process.cwd()
     ) {
         if (config.scaffolding.syntax.open[0]===config.scaffolding.syntax.dontInfer[0])
-            throw new Error(`syntax configuration error: config.scaffolding.syntax.open "${config.scaffolding.syntax.open}" may not start with the same character as config.scaffolding.syntax.dontInfer ${config.scaffolding.syntax.dontInfer}\n${JSON.stringify(config.scaffolding.syntax)}`);
+            throw new Error(`syntax configuration error: config.scaffolding.syntax.open "${
+                config.scaffolding.syntax.open
+            }" may not start with the same character as config.scaffolding.syntax.dontInfer ${
+                config.scaffolding.syntax.dontInfer
+            }\n${JSON.stringify(
+                config.scaffolding.syntax
+            )}`);
     }
+
+    /**
+     * Move all `@xform:*` directive-propterties to the top of the graph; in order of mapping
+     * @param templateGraph a graph on the template object
+     */
     protected anchorDirectives(templateGraph:Template|Array<any>) {
         if (templateGraph instanceof Array) return templateGraph;
+        // console.info('before')
+        // console.info(templateGraph)
+        const operationsInOrder = Object.keys(OPERATION_MAP);
         let directives = {}, target = {};
-        Object.keys(templateGraph).forEach(key=>(key.startsWith("@xform:")?directives:target as any)[key]=templateGraph[key]);
+        Object.keys(templateGraph).sort(
+            (a,b)=>(
+                a.startsWith("@xform:")
+                    ? (
+                        b.startsWith("@xform:")
+                            ? operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
+                            : 1
+                    )
+                    : (
+                        b.startsWith("@xform:")
+                            ? -1
+                            : 0
+                    )
+            )
+        ).forEach(
+            key=>(
+                key.startsWith("@xform:")
+                    ? directives
+                    : target as any
+            )[key]=templateGraph[key]
+        );
+        // console.info('after')
+        // console.info({
+        //     ...directives,
+        //     ...target
+        // })
         return {
             ...directives,
             ...target
         };
     }
     /**
-     * Parase a template object
+     * Parse a template object
      * @param templateGraph The root template object if not provided; or a graph on the template object
      * @returns A version of the template with values resolved and operations completed
      */
@@ -65,6 +112,8 @@ export class Templater {
                 if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
                     let operation = OPERATION_MAP[directiveOrProperty](this);
                     operation.run([templateGraph,(templateGraph as any)[directiveOrProperty]]);
+                    // console.info(`✈`)
+                    // console.info(templateGraph)
                 }
             }
             else {
