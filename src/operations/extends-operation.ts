@@ -21,20 +21,21 @@ export class ExtendsOperation extends Operation {
             }
         }
          */
-        if (typeof extentsions === 'string') ExtendsOperation.extend(target, join(templater.workingDirectory,extentsions));
+        if (typeof extentsions === 'string') ExtendsOperation.extend(target, join(templater.workingDirectory,extentsions), this.templater);
         else for (let extension in extentsions) {
             var extensionPath = extentsions[extension];
-            (function(extensionPath:string){
-                ExtendsOperation.extend(target, join(templater.workingDirectory,extensionPath));
-            })(extensionPath);
+            (function(extensionPath:string, templater:Templater){
+                ExtendsOperation.extend(target, join(templater.workingDirectory,extensionPath), templater);
+            })(extensionPath, this.templater);
         }
         //console.info(target)
     }
-    public static extend(target:any, pathRef:string) {
+    public static extend(target:any, pathRef:string, templater:Templater) {
         var source, parsed;
         try {
             source = `${readFileSync(pathRef)}`;
-            parsed = JSON.parse(source);
+            console.info(JSON.parse(source));
+            parsed = new Templater(JSON.parse(source), templater.config, templater.workingDirectory).parse();
         }
         catch (err) {
             console.warn(err);

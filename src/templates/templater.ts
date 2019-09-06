@@ -14,10 +14,10 @@ const AWOL = -1;
  * Map `Operation`s to object properites that are "directives" read (in order of mapping) by the `Templater`
  */
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
+    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater),
     "@xform:extends":(templater:Templater)=> new ExtendsOperation(templater),
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
-    "@xform:sort":(templater:Templater)=> new SortOperation(templater),
-    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
+    "@xform:sort":(templater:Templater)=> new SortOperation(templater)
 };
 export class Templater {
 
@@ -83,17 +83,19 @@ export class Templater {
             ...target
         };
     }
+
     /**
      * Parse a template object
      * @param templateGraph The root template object if not provided; or a graph on the template object
      * @returns A version of the template with values resolved and operations completed
      */
     parse(templateGraph?:Template|Array<any>|any, scope?:{[key:string]:any}) {
+        const topLevel = !templateGraph;
         if (typeof templateGraph === 'string') this.expression((templateGraph as string));
         if (typeof templateGraph !== 'object' && typeof templateGraph !== 'undefined') return templateGraph;
         templateGraph = this.anchorDirectives(templateGraph || this.template);
         let graphIsArray = templateGraph instanceof Array;
-        let templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
+        const templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
         for (let directiveOrProperty in templateGraph) {
             let resultingKey = this.expression(directiveOrProperty, scope);
             let resultingValue; 
@@ -112,8 +114,14 @@ export class Templater {
                 if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
                     let operation = OPERATION_MAP[directiveOrProperty](this);
                     operation.run([templateGraph,(templateGraph as any)[directiveOrProperty]]);
-                    // console.info(`✈`)
-                    // console.info(templateGraph)
+                    if (directiveOrProperty.startsWith("@xform:merge")) {
+                        Object.keys(templateGraph).forEach(
+                            templateGraphKey=>
+                            !templateGraphKey.startsWith("@xform:")
+                                ?(templatedGraph as any)[templateGraphKey] = templateGraph[templateGraphKey]
+                                : null
+                        )
+                    }
                 }
             }
             else {

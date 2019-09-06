@@ -45,6 +45,8 @@ describe('Templater',()=>{
         });
         it('removes items',()=>{
             let result = templater.parse();
+            console.info('Output..')
+            console.info(result);
             expect((result as any).remove.inner).toBeUndefined();
             expect((result as any).removeThis).toBeUndefined();
         });
@@ -62,10 +64,11 @@ describe('Templater',()=>{
                 {key:4}
             ].map(i=>i.key).toString());
         });
-        fit('extends other files',()=>{
+        it('extends other files',()=>{
             let result = templater.parse();
-            console.info(result);
-            expect((result as any)['extended-properties']).toBe('work');
+            // console.info('Output..')
+            // console.info(result);
+            expect((result as any)['extended-properties']).toBe('work well');
         });
     });
     describe('filter',()=>{
