@@ -22,13 +22,13 @@ export class MergeOperation extends Operation {
         }
     }
     public static deepMerge(a:any, b:any) {
-        for (let prop in a) {
-            switch (typeof a[prop]) {
+        for (let prop in b) {
+            switch (typeof b[prop]) {
                 case 'object':
-                    MergeOperation.deepMerge(a[prop], b[prop]);
+                        MergeOperation.deepMerge(a[prop], b[prop]);
                     break;
                 default:
-                    a[prop] = b[prop];
+                        a[prop] = b[prop];
             }
         }
     }

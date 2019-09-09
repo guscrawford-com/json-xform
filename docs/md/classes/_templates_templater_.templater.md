@@ -18,6 +18,7 @@
 
 * [config](_templates_templater_.templater.md#config)
 * [template](_templates_templater_.templater.md#template)
+* [workingDirectory](_templates_templater_.templater.md#workingdirectory)
 
 #### Methods
 
@@ -35,16 +36,17 @@
 
 ###  constructor
 
-\+ **new Templater**(`template`: *[Template](../interfaces/_templates_template_interface_.template.md)*, `config`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*): *[Templater](_templates_templater_.templater.md)*
+\+ **new Templater**(`template`: *[Template](../interfaces/_templates_template_interface_.template.md)*, `config`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*, `workingDirectory`: *string*): *[Templater](_templates_templater_.templater.md)*
 
-*Defined in [templates/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L21)*
+*Defined in [templates/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L22)*
 
 **Parameters:**
 
-Name | Type | Default |
------- | ------ | ------ |
-`template` | [Template](../interfaces/_templates_template_interface_.template.md) | - |
-`config` | [TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md) | DEFAULT_TEMPLATE_CONFIG |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`template` | [Template](../interfaces/_templates_template_interface_.template.md) | - | A root object to look for `@xform:*` directive-properties on; and tranform accordingly |
+`config` | [TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md) | DEFAULT_TEMPLATE_CONFIG | *(optional)* A table of settings used to customize templating options (see `DEFAULT_TEMPLATE_CONFIG`) |
+`workingDirectory` | string | process.cwd() | *(optional)* A path (`process.cwd()` by default) to start from when resolving any filepath reference in the template  |
 
 **Returns:** *[Templater](_templates_templater_.templater.md)*
 
@@ -54,7 +56,9 @@ Name | Type | Default |
 
 • **config**: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md)*
 
-*Defined in [templates/templater.ts:25](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L25)*
+*Defined in [templates/templater.ts:32](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L32)*
+
+*(optional)* A table of settings used to customize templating options (see `DEFAULT_TEMPLATE_CONFIG`)
 
 ___
 
@@ -62,7 +66,19 @@ ___
 
 • **template**: *[Template](../interfaces/_templates_template_interface_.template.md)*
 
-*Defined in [templates/templater.ts:24](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L24)*
+*Defined in [templates/templater.ts:31](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L31)*
+
+A root object to look for `@xform:*` directive-properties on; and tranform accordingly
+
+___
+
+###  workingDirectory
+
+• **workingDirectory**: *string*
+
+*Defined in [templates/templater.ts:33](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L33)*
+
+*(optional)* A path (`process.cwd()` by default) to start from when resolving any filepath reference in the template
 
 ## Methods
 
@@ -70,13 +86,15 @@ ___
 
 ▸ **anchorDirectives**(`templateGraph`: *[Template](../interfaces/_templates_template_interface_.template.md) | `Array<any>`*): *object*
 
-*Defined in [templates/templater.ts:30](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L30)*
+*Defined in [templates/templater.ts:49](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L49)*
+
+Move all `@xform:*` directive-propterties to the top of the graph; in order of mapping
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`templateGraph` | [Template](../interfaces/_templates_template_interface_.template.md) \| `Array<any>` |
+Name | Type | Description |
+------ | ------ | ------ |
+`templateGraph` | [Template](../interfaces/_templates_template_interface_.template.md) \| `Array<any>` | a graph on the template object  |
 
 **Returns:** *object*
 
@@ -86,7 +104,7 @@ ___
 
 ▸ **expression**(`exprString`: *string*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:83](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L83)*
+*Defined in [templates/templater.ts:140](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L140)*
 
 **Parameters:**
 
@@ -103,7 +121,7 @@ ___
 
 ▸ **filter**(`expr`: *string*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:130](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L130)*
+*Defined in [templates/templater.ts:187](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L187)*
 
 **Parameters:**
 
@@ -120,7 +138,7 @@ ___
 
 ▸ **infer**(`value`: *string*): *any*
 
-*Defined in [templates/templater.ts:165](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L165)*
+*Defined in [templates/templater.ts:222](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L222)*
 
 **Parameters:**
 
@@ -136,9 +154,9 @@ ___
 
 ▸ **parse**(`templateGraph?`: *[Template](../interfaces/_templates_template_interface_.template.md) | `Array<any>` | any*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:44](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L44)*
+*Defined in [templates/templater.ts:92](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L92)*
 
-Parase a template object
+Parse a template object
 
 **Parameters:**
 
@@ -157,7 +175,7 @@ ___
 
 ▸ **partialExpression**(`exprString`: *string*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:102](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L102)*
+*Defined in [templates/templater.ts:159](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L159)*
 
 **Parameters:**
 
@@ -174,7 +192,7 @@ ___
 
 ▸ **reference**(`expr`: *string*, `scope?`: *undefined | object*): *any*
 
-*Defined in [templates/templater.ts:122](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L122)*
+*Defined in [templates/templater.ts:179](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L179)*
 
 **Parameters:**
 
@@ -191,7 +209,7 @@ ___
 
 ▸ **config**(`options`: *[TemplaterConfig](../interfaces/_templates_templater_config_interface_.templaterconfig.md) | any*): *object*
 
-*Defined in [templates/templater.ts:175](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L175)*
+*Defined in [templates/templater.ts:232](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L232)*
 
 **Parameters:**
 
@@ -209,7 +227,7 @@ ___
 
 ▸ **deref**(`obj`: *any*, `path`: *string | string[]*, `delim`: *string | `RegExp`*): *any*
 
-*Defined in [templates/templater.ts:186](https://github.com/guscrawford-com/json-xform/blob/a872c08/src/templates/templater.ts#L186)*
+*Defined in [templates/templater.ts:243](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.ts#L243)*
 
 **Parameters:**
 
