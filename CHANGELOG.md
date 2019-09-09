@@ -53,10 +53,12 @@ Adds support for optional non-inference of expression results; `@{ref}`
 ----
 
 ## 1.1.0-beta
-### Jul 3 2019
-#### Fix bugs with deep merge
+### Jul 2 2019
+#### Fix bugs, add experimental loops
 
-Fixes bugs doing a deep merge nested beyond the first level
+- Fix bugs deep merging
+- Fix multiple expressions in one key or value
+- Add experimental loops
 
 ----
 

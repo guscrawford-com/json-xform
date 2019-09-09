@@ -45,6 +45,8 @@ describe('Templater',()=>{
         });
         it('removes items',()=>{
             let result = templater.parse();
+            console.info('Output..')
+            console.info(result);
             expect((result as any).remove.inner).toBeUndefined();
             expect((result as any).removeThis).toBeUndefined();
         });
@@ -61,6 +63,12 @@ describe('Templater',()=>{
                 {key:1},
                 {key:4}
             ].map(i=>i.key).toString());
+        });
+        it('extends other files',()=>{
+            let result = templater.parse();
+            // console.info('Output..')
+            // console.info(result);
+            expect((result as any)['extended-properties']).toBe('work well');
         });
     });
     describe('filter',()=>{
@@ -181,11 +189,7 @@ function sampleFactory () {
         },
         "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"},
         "@xform:extends":{/*could be a string or an array of filenames and no operations*/
-            "filename":{
-                "@xform:merge":{
-                    "thisn":"that"
-                }
-            }
+            "0":"sample.json"
         }
     };
 }

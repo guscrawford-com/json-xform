@@ -1,0 +1,6 @@
+{
+    "@xform:var":{
+        "good":"well"
+    },
+    "extended-properties":"work ${good}"
+}
