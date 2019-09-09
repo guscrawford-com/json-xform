@@ -69,3 +69,11 @@ Adds support for optional non-inference of expression results; `@{ref}`
 Fix bug where max call-stack when parsing JSON with null values in it
 
 Also adds experimental "extends" support
+
+----
+
+## 1.3.0
+### Sep 9 2019
+#### Fix call-stack overflow templating JSON with null values
+
+Tests and readies `@xform:extends` directive
