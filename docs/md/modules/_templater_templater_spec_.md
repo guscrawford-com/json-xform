@@ -1,14 +1,14 @@
 > **[@guscrawford.com/json-xform](../README.md)**
 
-[Globals](../globals.md) / ["templates/templater.spec"](_templates_templater_spec_.md) /
+[Globals](../globals.md) / ["templater/templater.spec"](_templater_templater_spec_.md) /
 
-# External module: "templates/templater.spec"
+# External module: "templater/templater.spec"
 
 ### Index
 
 #### Functions
 
-* [sampleFactory](_templates_templater_spec_.md#samplefactory)
+* [sampleFactory](_templater_templater_spec_.md#samplefactory)
 
 ## Functions
 
@@ -16,7 +16,7 @@
 
 ▸ **sampleFactory**(): *object*
 
-*Defined in [templates/templater.spec.ts:108](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater.spec.ts#L108)*
+*Defined in [templater/templater.spec.ts:108](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/templater/templater.spec.ts#L108)*
 
 **Returns:** *object*
 

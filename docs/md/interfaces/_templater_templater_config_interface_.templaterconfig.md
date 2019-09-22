@@ -1,6 +1,6 @@
 > **[@guscrawford.com/json-xform](../README.md)**
 
-[Globals](../globals.md) / ["templates/templater-config.interface"](../modules/_templates_templater_config_interface_.md) / [TemplaterConfig](_templates_templater_config_interface_.templaterconfig.md) /
+[Globals](../globals.md) / ["templater/templater-config.interface"](../modules/_templater_templater_config_interface_.md) / [TemplaterConfig](_templater_templater_config_interface_.templaterconfig.md) /
 
 # Interface: TemplaterConfig
 
@@ -12,9 +12,9 @@
 
 #### Properties
 
-* [filters](_templates_templater_config_interface_.templaterconfig.md#filters)
-* [operations](_templates_templater_config_interface_.templaterconfig.md#operations)
-* [scaffolding](_templates_templater_config_interface_.templaterconfig.md#scaffolding)
+* [filters](_templater_templater_config_interface_.templaterconfig.md#filters)
+* [operations](_templater_templater_config_interface_.templaterconfig.md#operations)
+* [scaffolding](_templater_templater_config_interface_.templaterconfig.md#scaffolding)
 
 ## Properties
 
@@ -22,7 +22,7 @@
 
 • **filters**: *object*
 
-*Defined in [templates/templater-config.interface.ts:65](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater-config.interface.ts#L65)*
+*Defined in [templater/templater-config.interface.ts:65](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/templater/templater-config.interface.ts#L65)*
 
 Contains arrow functions used to transform exressions:
 `(args:any[])=>any`
@@ -48,7 +48,7 @@ ___
 
 • **operations**: *object*
 
-*Defined in [templates/templater-config.interface.ts:40](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater-config.interface.ts#L40)*
+*Defined in [templater/templater-config.interface.ts:40](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/templater/templater-config.interface.ts#L40)*
 
 Controls Operations related syntax
 
@@ -70,7 +70,7 @@ ___
 
 • **scaffolding**: *object*
 
-*Defined in [templates/templater-config.interface.ts:5](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/templates/templater-config.interface.ts#L5)*
+*Defined in [templater/templater-config.interface.ts:5](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/templater/templater-config.interface.ts#L5)*
 
 Controls scaffolding options
 
