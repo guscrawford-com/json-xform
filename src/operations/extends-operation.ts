@@ -1,4 +1,4 @@
-import { Templater } from "../templates/templater";
+import { Templater } from "../templater/templater";
 import { Operation } from "./operation";
 import { MergeOperation } from "./merge-operation";
 import { readFileSync } from 'fs';

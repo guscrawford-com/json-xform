@@ -1,4 +1,4 @@
-import { Templater } from "../templates/templater";
+import { Templater } from "../templater/templater";
 import { Operation } from "./operation";
 
 export class MergeOperation extends Operation {
