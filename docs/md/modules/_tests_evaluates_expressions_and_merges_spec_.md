@@ -16,4 +16,4 @@
 
 • **EvaluatesExpressionsAndMergesSample**: *any* =  require('../../samples/evaluates-expressions-and-merges.json')
 
-Defined in tests/evaluates-expressions-and-merges.spec.ts:3
+*Defined in [tests/evaluates-expressions-and-merges.spec.ts:3](https://github.com/guscrawford-com/json-xform/blob/344182c/src/tests/evaluates-expressions-and-merges.spec.ts#L3)*

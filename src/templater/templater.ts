@@ -14,6 +14,7 @@ const AWOL = -1;
  * Map `Operation`s to object properites that are "directives" read (in order of mapping) by the `Templater`
  */
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
+    "@xform:import":(templater:Templater)=> new ExtendsOperation(templater),
     "@xform:remove":(templater:Templater)=> new RemoveOperation(templater),
     "@xform:extends":(templater:Templater)=> new ExtendsOperation(templater),
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
@@ -51,38 +52,26 @@ export class Templater {
         // console.info('before')
         // console.info(templateGraph)
         const operationsInOrder = Object.keys(OPERATION_MAP);
-        let directives = {}, target = {};
-        // TODO: Separate; then sort
-        Object.keys(templateGraph).sort(
-            (a,b)=>(
-                a.startsWith("@xform:")
-                    ? (
-                        b.startsWith("@xform:")
-                            ? operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
-                            : 1
-                    )
-                    : (
-                        b.startsWith("@xform:")
-                            ? -1
-                            : 0
-                    )
-            )
-        ).forEach(
+        let directives:{[key:string]:any} = {}, target = {}, directivesInOperationOrder:{[key:string]:any} = {};
+        let result:{[key:string]:any} = {};
+        Object.keys(templateGraph).forEach(
             key=>(
                 key.startsWith("@xform:")
                     ? directives
                     : target as any
             )[key]=templateGraph[key]
         );
-        // console.info('after')
-        // console.info({
-        //     ...directives,
-        //     ...target
-        // })
-        return {
+        Object.keys(directives).sort(
+            (a,b)=>operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
+        ).forEach((key:string)=>directivesInOperationOrder[key]=directives[key]);
+        if (directivesInOperationOrder["@xform:import"]) {
+            result["@xform:import"] = directivesInOperationOrder["@xform:import"];
+            delete directivesInOperationOrder["@xform:import"];
+        }
+        return Object.assign(result, {
             ...target,
-            ...directives
-        };
+            ...directivesInOperationOrder
+        });
     }
 
     /**
@@ -112,7 +101,6 @@ export class Templater {
                     break;
                 default: resultingValue = (templateGraph as any)[directiveOrProperty];
             }
-            //if (resultingValue) Object.assign(templatedGraph, resultingValue);
             if (directiveOrProperty.startsWith("@xform:")) {
                 if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
                     let operation = OPERATION_MAP[directiveOrProperty](this);
@@ -127,16 +115,6 @@ export class Templater {
                             scope || templateGraph
                         ]
                     );
-                    //resultingValue = templateGraph;
-                    //console.error(resultingValue)
-                    // if (directiveOrProperty.startsWith("@xform:merge")) {
-                    //     Object.keys(templateGraph).forEach(
-                    //         templateGraphKey=>
-                    //         !templateGraphKey.startsWith("@xform:")
-                    //             ?(templatedGraph as any)[templateGraphKey] = templateGraph[templateGraphKey]
-                    //             : null
-                    //     )
-                    // }
                 }
             }
             else {
@@ -148,7 +126,6 @@ export class Templater {
                 }
             }
         }
-        //console.info(templatedGraph)
         return templatedGraph;
     }
 

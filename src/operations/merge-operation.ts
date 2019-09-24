@@ -27,6 +27,8 @@ export class MergeOperation extends Operation {
         for (let prop in b) {
             switch (typeof b[prop]) {
                 case 'object':
+                        if (typeof a[prop] === 'undefined') 
+                            a[prop] = (b[prop] instanceof Array ? [] : {});
                         MergeOperation.deepMerge(a[prop], b[prop]);
                     break;
                 default:
