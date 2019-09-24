@@ -10,12 +10,14 @@ export class MergeOperation extends Operation {
         let merges = args[1];
         for (let mergeOn in merges) {
             let refs = mergeOn.split(this.templater.config.scaffolding.syntax.reference.delim);
+
             let mergeTarget = (
                 refs.length > 1
-                    ? Templater.deref(target, refs.slice(0, refs.length-1))
+                    ? Templater.deref(target, refs.slice(0, refs.length-1), this.templater.config.scaffolding.syntax.reference.delim, true)
                     : target
             );
             let lastRef = refs.slice(refs.length > 1 ?refs.length-2:0).pop() as string;
+            //if (typeof mergeTarget[lastRef] === 'object' ) Object.assign(mergeTarget[lastRef], mergeSource[lastRef])
             typeof mergeTarget[lastRef] === 'object' && typeof merges[mergeOn] === 'object'
                 ? MergeOperation.deepMerge(mergeTarget[lastRef], merges[mergeOn])
                 : mergeTarget[lastRef] = merges[mergeOn]

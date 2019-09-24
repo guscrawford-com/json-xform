@@ -36,7 +36,7 @@
 
 \+ **new Operation**(`templater`: *[Templater](_templater_templater_.templater.md)*): *[Operation](_operations_operation_.operation.md)*
 
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/operations/operation.ts#L3)*
+*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/operation.ts#L3)*
 
 **Parameters:**
 
@@ -52,7 +52,7 @@ Name | Type |
 
 • **templater**: *[Templater](_templater_templater_.templater.md)*
 
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/operations/operation.ts#L4)*
+*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/operation.ts#L4)*
 
 ## Methods
 
@@ -60,12 +60,12 @@ Name | Type |
 
 ▸ **run**(`args`: *any[]*): *any*
 
-*Defined in [operations/operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/1d2e823/src/operations/operation.ts#L5)*
+*Defined in [operations/operation.ts:12](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/operation.ts#L12)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`args` | any[] |
+Name | Type | Description |
+------ | ------ | ------ |
+`args` | any[] | **`Operation` Injectables** - `[0]` : usually the target object / reference to manipulate - `[1]` : the first "argument" in this form: `{"<at>xform:<operation>":<argument>}` - `[n > 1]` : see specific `Operation` implementation / docs  |
 
 **Returns:** *any*

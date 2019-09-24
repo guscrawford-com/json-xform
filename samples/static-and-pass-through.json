@@ -1,0 +1,51 @@
+{
+    "otherScripts": {
+        "${buildScriptName}-${buildScriptVal}": "tsc -p ${buildScriptName}/${buildScriptVal}"
+    },
+    "scripts": {
+        "${buildScriptName}": "${buildScriptVal}",
+        "rebuild": "rimraf dist && ${buildScriptVal}",
+        "test": "jasmine"
+    },
+    "stanza": {
+        "a": "a"
+    },
+    "w": 1,
+    "x": "1",
+    "y": "@{varBig}",
+    "z": "${varBig}",
+    "stanza2": "stanza2",
+    "removeThis": "here",
+    "remove": {
+        "inner": "here"
+    },
+    "merge": {
+        "super": {}
+    },
+    "myArray": [
+        "z",
+        "d",
+        "a",
+        3
+    ],
+    "myInnerArray": {
+        "myOtherArray": [
+            {"key": 4
+            },
+            {"key": 1
+            },
+            {"key": -7
+            }
+        ]
+    },
+    "filtered": {
+        "shouldBeEqual": "${eq(varA,varB)}",
+        "shouldLess": "${lt(varSmall,varBig)}",
+        "shouldMore": "${gt(varBig,varSmall)}",
+        "shouldNotBeLess": "${gt(varSmall,varBig)}",
+        "shouldNotBeMore": "${lt(varBig,varSmall)}",
+        "shouldMaintainObj": "${varC}",
+        "ifVarBigIsBigger": "${if(gt(varBig,varSmall),varC,varA)}",
+        "ifVarBigIsSmaller": "${if(lt(varBig,varSmall),varC,varA)}"
+    }
+}
