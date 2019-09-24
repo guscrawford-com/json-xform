@@ -1,4 +1,17 @@
 {
 
-    "extended-properties":"work well"
+    "extended-properties":"work well",
+    "@but not these":"@cus of things",
+    "name": "@guscrawford.com/json-xform",
+    "version": "1.4.0",
+    "description": "A json transformer",
+    "main": "src/json-xform.ts",
+    "license": "MIT",
+    "repository": "https://github.com/guscrawford-com/json-xform",
+    "keywords": [
+      "JSON",
+      "transform",
+      "template",
+      "static"
+    ]
 }

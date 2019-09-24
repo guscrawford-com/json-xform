@@ -33,7 +33,7 @@
 
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
-*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L7)*
+*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/344182c/src/operations/extends-operation.ts#L7)*
 
 **Parameters:**
 
@@ -51,7 +51,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
-*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L8)*
+*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/344182c/src/operations/extends-operation.ts#L8)*
 
 ## Methods
 
@@ -61,7 +61,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
-*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L11)*
+*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/344182c/src/operations/extends-operation.ts#L11)*
 
 **Parameters:**
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **extend**(`target`: *any*, `pathRef`: *string*, `templater`: *[Templater](_templater_templater_.templater.md)*): *void*
 
-*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L33)*
+*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/344182c/src/operations/extends-operation.ts#L33)*
 
 **Parameters:**
 
