@@ -42,7 +42,7 @@ export const DEFAULT_FILTERS = {
         var length = (set instanceof Array ? set.length : (typeof set === 'object' ? Object.keys(set).length : set.length));
         var index = 0;
         for (var key in set) {
-            output.push(templater.parse(set[key],{length, index, key}));
+            output.push(templater.parse(set[key],{...templater.template, length, index, key}));
             index ++;
         };
         return output;

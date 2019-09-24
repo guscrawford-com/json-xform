@@ -59,7 +59,19 @@ describe('With Ad-hoc Complexity',()=>{
             ).parse();
             expect((result as any).objA.nested).toBe('A');
         });
-
+        fit('foreach works',()=>{
+            let result = new Templater(
+                {
+                    "@xform:var":{
+                        "a":"A",
+                        "set": ["${a}"]
+                    },
+                    setB:"${foreach(set)}"
+                } as any
+            ).parse();
+            console.log(result)
+            expect((result as any).objA.nested).toBe('A');
+        });
         it('merges',()=>{
             let result = templater.parse();
             expect((result as any).stanza.a).toBe('A');
