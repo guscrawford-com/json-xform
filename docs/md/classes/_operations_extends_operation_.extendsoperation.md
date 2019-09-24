@@ -29,17 +29,17 @@
 
 ###  constructor
 
-\+ **new ExtendsOperation**(`templater`: *[Templater](_templates_templater_.templater.md)*): *[ExtendsOperation](_operations_extends_operation_.extendsoperation.md)*
+\+ **new ExtendsOperation**(`templater`: *[Templater](_templater_templater_.templater.md)*): *[ExtendsOperation](_operations_extends_operation_.extendsoperation.md)*
 
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
-*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/operations/extends-operation.ts#L7)*
+*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L7)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`templater` | [Templater](_templates_templater_.templater.md) |
+`templater` | [Templater](_templater_templater_.templater.md) |
 
 **Returns:** *[ExtendsOperation](_operations_extends_operation_.extendsoperation.md)*
 
@@ -47,11 +47,11 @@ Name | Type |
 
 ### `Protected` templater
 
-• **templater**: *[Templater](_templates_templater_.templater.md)*
+• **templater**: *[Templater](_templater_templater_.templater.md)*
 
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
-*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/operations/extends-operation.ts#L8)*
+*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L8)*
 
 ## Methods
 
@@ -61,7 +61,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
-*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/operations/extends-operation.ts#L11)*
+*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L11)*
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ ___
 
 ### `Static` extend
 
-▸ **extend**(`target`: *any*, `pathRef`: *string*, `templater`: *[Templater](_templates_templater_.templater.md)*): *void*
+▸ **extend**(`target`: *any*, `pathRef`: *string*, `templater`: *[Templater](_templater_templater_.templater.md)*): *void*
 
-*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/9eac5e8/src/operations/extends-operation.ts#L33)*
+*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/operations/extends-operation.ts#L33)*
 
 **Parameters:**
 
@@ -85,6 +85,6 @@ Name | Type |
 ------ | ------ |
 `target` | any |
 `pathRef` | string |
-`templater` | [Templater](_templates_templater_.templater.md) |
+`templater` | [Templater](_templater_templater_.templater.md) |
 
 **Returns:** *void*

@@ -72,8 +72,8 @@ Also adds experimental "extends" support
 
 ----
 
-## 1.3.0
+## 1.4.0
 ### Sep 9 2019
-#### Fix call-stack overflow templating JSON with null values
+#### @extends
 
 Tests and readies `@xform:extends` directive

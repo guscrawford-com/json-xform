@@ -52,6 +52,7 @@ export class Templater {
         // console.info(templateGraph)
         const operationsInOrder = Object.keys(OPERATION_MAP);
         let directives = {}, target = {};
+        // TODO: Separate; then sort
         Object.keys(templateGraph).sort(
             (a,b)=>(
                 a.startsWith("@xform:")
@@ -79,8 +80,8 @@ export class Templater {
         //     ...target
         // })
         return {
-            ...directives,
-            ...target
+            ...target,
+            ...directives
         };
     }
 
@@ -90,11 +91,12 @@ export class Templater {
      * @returns A version of the template with values resolved and operations completed
      */
     parse(templateGraph?:Template|Array<any>|any, scope?:{[key:string]:any}) {
-        const topLevel = !templateGraph;
+        const root = !templateGraph;
         if (typeof templateGraph === 'string') this.expression((templateGraph as string));
         if (typeof templateGraph !== 'object' && typeof templateGraph !== 'undefined') return templateGraph;
         templateGraph = this.anchorDirectives(templateGraph || this.template);
         let graphIsArray = templateGraph instanceof Array;
+        // Returns:
         const templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
         for (let directiveOrProperty in templateGraph) {
             let resultingKey = this.expression(directiveOrProperty, scope);
@@ -110,18 +112,31 @@ export class Templater {
                     break;
                 default: resultingValue = (templateGraph as any)[directiveOrProperty];
             }
+            //if (resultingValue) Object.assign(templatedGraph, resultingValue);
             if (directiveOrProperty.startsWith("@xform:")) {
                 if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
                     let operation = OPERATION_MAP[directiveOrProperty](this);
-                    operation.run([templateGraph,(templateGraph as any)[directiveOrProperty]]);
-                    if (directiveOrProperty.startsWith("@xform:merge")) {
-                        Object.keys(templateGraph).forEach(
-                            templateGraphKey=>
-                            !templateGraphKey.startsWith("@xform:")
-                                ?(templatedGraph as any)[templateGraphKey] = templateGraph[templateGraphKey]
-                                : null
-                        )
-                    }
+                    operation.run(
+                        // Operation injections:
+                        [
+                            // target:
+                            templatedGraph,
+                            // args:
+                            resultingValue || (templateGraph as any)[directiveOrProperty],
+                            // scope
+                            scope || templateGraph
+                        ]
+                    );
+                    //resultingValue = templateGraph;
+                    //console.error(resultingValue)
+                    // if (directiveOrProperty.startsWith("@xform:merge")) {
+                    //     Object.keys(templateGraph).forEach(
+                    //         templateGraphKey=>
+                    //         !templateGraphKey.startsWith("@xform:")
+                    //             ?(templatedGraph as any)[templateGraphKey] = templateGraph[templateGraphKey]
+                    //             : null
+                    //     )
+                    // }
                 }
             }
             else {
@@ -133,6 +148,7 @@ export class Templater {
                 }
             }
         }
+        //console.info(templatedGraph)
         return templatedGraph;
     }
 
@@ -240,13 +256,15 @@ export class Templater {
         }
     }
 
-    static deref(obj:any, path:string|string[], delim:string|RegExp='.'):any {
+    static deref(obj:any, path:string|string[], delim:string|RegExp='.', createUndefinedPaths=false):any {
         if (delim instanceof RegExp)
             delim = delim.toString().replace('/','').replace('\\','');
         if (typeof path === 'string')
             path = path.split(delim);
         if (!obj) return obj;
         if (!path.length) return obj;
-        return Templater.deref(obj[path.shift() as string], path, delim);
+        if (createUndefinedPaths && typeof obj[path[0]] === 'undefined')
+            obj[path[0] as string] = {};
+        return Templater.deref(obj[path.shift() as string], path, delim, createUndefinedPaths);
     }
 }

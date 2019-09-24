@@ -1,4 +1,4 @@
-import { Templater } from "../templates/templater";
+import { Templater } from "../templater/templater";
 import { Operation } from "./operation";
 import { MergeOperation } from "./merge-operation";
 import { readFileSync } from 'fs';
@@ -34,12 +34,12 @@ export class ExtendsOperation extends Operation {
         var source, parsed;
         try {
             source = `${readFileSync(pathRef)}`;
-            console.info(JSON.parse(source));
             parsed = new Templater(JSON.parse(source), templater.config, templater.workingDirectory).parse();
         }
         catch (err) {
             console.warn(err);
         }
         if (parsed) MergeOperation.deepMerge(target, parsed);
+            //console.error(target);
     }
 }

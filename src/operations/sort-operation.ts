@@ -1,4 +1,4 @@
-import { Templater } from "../templates/templater";
+import { Templater } from "../templater/templater";
 import { Operation } from "./operation";
 
 export class SortOperation extends Operation {
@@ -20,9 +20,10 @@ export class SortOperation extends Operation {
                 sortOnRefs = [""];
             }
             let refs = sorting.split(this.templater.config.scaffolding.syntax.reference.delim);
+
             let sortTarget = (
                 refs.length > 1
-                    ? Templater.deref(target, refs.slice(0, refs.length-2 || 1))
+                    ? Templater.deref(target, refs.slice(0, refs.length-2 || 1), this.templater.config.scaffolding.syntax.reference.delim)
                     : target
             );
             let lastRef = refs.slice(refs.length > 1 ?refs.length-2:0).pop() as string;
