@@ -16,4 +16,4 @@
 
 • **OmniSample**: *any* =  require('../../samples/omni.json')
 
-*Defined in [templater/templater.spec.ts:4](https://github.com/guscrawford-com/json-xform/blob/b3a7638/src/templater/templater.spec.ts#L4)*
+*Defined in [templater/templater.spec.ts:4](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/templater.spec.ts#L4)*
