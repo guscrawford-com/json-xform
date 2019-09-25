@@ -10,6 +10,7 @@
 
 * ["json-xform"](modules/_json_xform_.md)
 * ["operations/extends-operation"](modules/_operations_extends_operation_.md)
+* ["operations/foreach-operation"](modules/_operations_foreach_operation_.md)
 * ["operations/merge-operation"](modules/_operations_merge_operation_.md)
 * ["operations/operation"](modules/_operations_operation_.md)
 * ["operations/remove-operation"](modules/_operations_remove_operation_.md)

@@ -14,282 +14,202 @@ Manipulate JSON files statically
 
 ----
 
-## Off the Cuff Example
+## Examples
 
-***⚠ Important: The `foreach` filter and nested directives are in testing...***
+### Variable Replacement
+
+Use `@xform:var` to define blocks of variables you can scope; use filters to manipulate data:
+
+*`@{<ref>}` suppresses auto-inference (forcing the `number-a` example property to be a string interpretation), use `number` filter to force string values to numerics.*
 
 ```
 const Templater = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:var":{
-    "something":"this"
+    "something":"this",
+    "number-lit":55,
+    "number-str":"65"
   },
-  "do": "${something}"
-}).parse() === {
-  "do": "this"
-} === true;
-```
-
-## More Complex Example
-
-**Input**
-
-```
-....
-{
-  "@xform:sort":{
-      "myArray":"asc",
-      "myInnerArray.myOtherArray":"key desc"
-  },
-  "@xform:var":{
-      buildScriptName:"build",
-      buildScriptVal:"tsc",
-      varA:"fore",
-      varB:"fore",
-      varC:{
-          anObject:true,
-          withProps:"like this"
-      },
-      varSmall:2,
-      varBig:6,
-      libs:[
-          "ui",
-          "api",
-          {"@xform:merge":{
-              "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})":"tsc -p ${buildScriptName}/${buildScriptVal}"
-          },practicalScripts:{}}
-      ]
-  },
-  "@xform:merge":{
-      "stanza.a":"A",
-      "stanza.b":"B",
-      "stanza2":"Stanza2",
-      "scripts.new-${buildScriptName}":"new-${buildScriptVal}",
-      "merge.super.deep":'deeper-yet'
-  },
-  otherScripts:{
-      "${buildScriptName}-${buildScriptVal}":"tsc -p ${buildScriptName}/${buildScriptVal}"
-  },
-  scripts:{
-      "${buildScriptName}":"${buildScriptVal}",
-      "rebuild":"rimraf dist && ${buildScriptVal}",
-      "test":"jasmine"
-  },
-  stanza:{
-      a:"a"
-  },
-  w:1,
-  x:"1",
-  y:"@{varBig}",
-  z:"${varBig}",
-  stanza2:"stanza2",
-  removeThis:"here",
-  remove:{
-      inner:"here"
-  },
-  merge:{
-      super:{
-      }
-  },
-  myArray:[
-      "z",
-      "d",
-      "a",
-      3
-  ],
-  myInnerArray:{
-      myOtherArray:[
-          {key:4},
-          {key:1},
-          {key:-7}
-      ]
-  },
-  filtered:{
-      shouldBeEqual:"${eq(varA,varB)}",
-      shouldLess:"${lt(varSmall,varBig)}",
-      shouldMore:"${gt(varBig,varSmall)}",
-      shouldNotBeLess:"${gt(varSmall,varBig)}",
-      shouldNotBeMore:"${lt(varBig,varSmall)}",
-      shouldMaintainObj:"${varC}",
-      ifVarBigIsBigger:"${if(gt(varBig,varSmall),varC,varA)}",
-      ifVarBigIsSmaller:"${if(lt(varBig,varSmall),varC,varA)}"
-  },
-  practicalScripts:{
-      "testEarly":"${foreach(libs)}"
-  },
-  "@xform:remove":{"removeThis":"removeThis","removeInnter":"remove.inner"}
-}
+  "do": "${something}",
+  "number-a":"@{number-lit}",
+  "number-b":"${number(number-str)}"
+}).parse();
 ```
 
 **Output**
 
 ```
 {
-  "@xform:sort": {
-    "myArray": "asc",
-    "myInnerArray.myOtherArray": "key desc"
-  },
-  "@xform:var": {
-    "buildScriptName": "build",
-    "buildScriptVal": "tsc",
-    "varA": "fore",
-    "varB": "fore",
-    "varC": {
-      "anObject": true,
-      "withProps": "like this"
-    },
-    "varSmall": 2,
-    "varBig": 6,
-    "libs": [
-      "ui",
-      "api",
-      {
-        "@xform:merge": {
-          "practicalScripts.${buildScriptName}-${buildScriptVal} (${index})": "tsc -p ${buildScriptName}/${buildScriptVal}"
-        },
-        "practicalScripts": {}
-      }
-    ]
-  },
-  "@xform:merge": {
-    "stanza.a": "A",
-    "stanza.b": "B",
-    "stanza2": "Stanza2",
-    "scripts.new-${buildScriptName}": "new-${buildScriptVal}",
-    "merge.super.deep": "deeper-yet"
-  },
-  "otherScripts": {
-    "${buildScriptName}-${buildScriptVal}": "tsc -p ${buildScriptName}/${buildScriptVal}"
-  },
-  "scripts": {
-    "${buildScriptName}": "${buildScriptVal}",
-    "rebuild": "rimraf dist && ${buildScriptVal}",
-    "test": "jasmine"
-  },
-  "stanza": {
-    "a": "a"
-  },
-  "w": 1,
-  "x": "1",
-  "y": "@{varBig}",
-  "z": "${varBig}",
-  "stanza2": "stanza2",
-  "removeThis": "here",
-  "remove": {
-    "inner": "here"
-  },
-  "merge": {
-    "super": {}
-  },
-  "myArray": [
-    "z",
-    "d",
-    "a",
-    3
-  ],
-  "myInnerArray": {
-    "myOtherArray": [
-      {
-        "key": 4
-      },
-      {
-        "key": 1
-      },
-      {
-        "key": -7
-      }
-    ]
-  },
-  "filtered": {
-    "shouldBeEqual": "${eq(varA,varB)}",
-    "shouldLess": "${lt(varSmall,varBig)}",
-    "shouldMore": "${gt(varBig,varSmall)}",
-    "shouldNotBeLess": "${gt(varSmall,varBig)}",
-    "shouldNotBeMore": "${lt(varBig,varSmall)}",
-    "shouldMaintainObj": "${varC}",
-    "ifVarBigIsBigger": "${if(gt(varBig,varSmall),varC,varA)}",
-    "ifVarBigIsSmaller": "${if(lt(varBig,varSmall),varC,varA)}"
-  },
-  "practicalScripts": {
-    "testEarly": "${foreach(libs)}"
-  },
-  "@xform:remove": {
-    "removeThis": "removeThis",
-    "removeInnter": "remove.inner"
-  }
+  "do": "this",
+  "number-a":"55",
+  "number-b":65
 }
+```
+
+### Sorting
+
+Sort your JSON
+
+```
+const Templater = require('@guscrawford.com/json-xform);
+new Templater({
+  "@xform:sort":{
+    "values":"desc",
+    "moreValues":"id asc"
+  },
+  "values": [3,1,5],
+  "moreValues":[
+    { "id": 7, "name":"Crawford"},
+    { "id": 3, "name":"Malcolm"},
+    { "id": 2, "name":"Angus"}
+  ]
+}).parse();
+```
+
+**Output**
+
+```
 {
-  "otherScripts": {
-    "build-tsc": "tsc -p build/tsc"
-  },
-  "scripts": {
-    "build": "tsc",
-    "rebuild": "rimraf dist && tsc",
-    "test": "jasmine",
-    "new-build": "new-tsc"
-  },
-  "stanza": {
-    "a": "A",
-    "b": "B"
-  },
-  "w": 1,
-  "x": "1",
-  "y": "6",
-  "z": 6,
-  "stanza2": "Stanza2",
-  "remove": {},
-  "merge": {
-    "super": {
-      "deep": "deeper-yet"
+  "values": [5,3,1],
+  "moreValues":[
+    { "id": 2, "name":"Angus"},
+    { "id": 3, "name":"Malcolm"},
+    { "id": 7, "name":"Crawford"}
+  ]
+}
+```
+
+### Deep Merging
+
+Merge deep; masking structures on to others.
+
+```
+const Templater = require('@guscrawford.com/json-xform);
+new Templater({
+  "@xform:merge":{
+    "compilerOptions":{
+      "paths":{
+        "@org/package":[
+          "org-package/src"
+        ]
+      }
     }
   },
-  "myArray": [
-    3,
-    "a",
-    "d",
-    "z"
-  ],
-  "myInnerArray": {
-    "myOtherArray": [
-      {
-        "key": -7
-      },
-      {
-        "key": 1
-      },
-      {
-        "key": 4
-      }
-    ]
-  },
-  "filtered": {
-    "shouldBeEqual": true,
-    "shouldLess": true,
-    "shouldMore": true,
-    "shouldNotBeLess": false,
-    "shouldNotBeMore": false,
-    "shouldMaintainObj": {
-      "anObject": true,
-      "withProps": "like this"
-    },
-    "ifVarBigIsBigger": {
-      "anObject": true,
-      "withProps": "like this"
-    },
-    "ifVarBigIsSmaller": "fore"
-  },
-  "practicalScripts": {
-    "testEarly": [
-      "ui",
-      "api",
-      {
-        "practicalScripts": {
-          "build-tsc (2)": "tsc -p build/tsc"
-        }
-      }
-    ]
+  "compilerOptions":{
+    "target":"es5"
+  }
+}).parse();
+```
+
+**Output**
+
+```
+{
+  "compilerOptions":{
+    "target":"es5",
+    "paths":{
+      "@org/package":[
+        "org-package/src"
+      ]
+    }
   }
 }
+```
+
+### Removal
+
+Remove items from JSON
+
+```
+const Templater = require('@guscrawford.com/json-xform);
+new Templater({
+  "@xform:remove":{
+    "scripts":{
+      "this-script"
+    },
+    "scripts.this-also"
+  },
+  "scripts":{
+    "this-script":"needs to go",
+    "this-also":"needs to go"
+  }
+}).parse();
+```
+
+**Output**
+
+```
+{
+  "scripts":{}
+}
+```
+
+### Conditionals
+
+Use inline "filters" like `if(<js-like-falsy-truthy-conditional>,<resolve-true>,<resolve-falsy>)` and `gt(<ref-a>,<ref-b>`) to produce conditionally built JSON.
+
+*See other filters `lt`, `gte`, `lte`, `not`, `number` for further filtering references...*
+
+```
+const Templater = require('@guscrawford.com/json-xform);
+new Templater({
+  "@xform:var":{
+    "production":true,
+    "development":false,
+    "build-prod":"ng build --prod",
+    "build-dev":"ng build"
+  },
+  "scripts":{
+    "build":"${if(gt(production,development),build-prod,build-dev)}"
+  }
+}).parse();
+```
+
+**Output**
+
+```
+{
+  "scripts":{"build":"ng build --prod"}
+}
+```
+
+### Iterating
+
+Use the `@xform:foreach(<iterable-var-reference>)` directive to repeat portions of JSON.
+
+*Where the value of each item in the iterable is referencable by `item`; each numerical index if available is `index` and `key` is always the key or stringified index*
+
+```
+const Templater = require('@guscrawford.com/json-xform);
+new Templater({
+  "@xform:var":{
+    "sub-apps":["ui","backend","etc"]
+  },
+  "scripts":{
+    "@xform:foreach(sub-apps)":{
+      "test-${item}":"jasmine ${item}",
+      "build-${item}":"tsc -p ${item}.tsconfig.json",
+      "lint-${item}":"cd ${item} && npm run lint"
+    }
+  }
+}).parse();
+```
+
+**Output**
+
+```
+{
+  "scripts":{
+    "@xform:foreach(sub-apps)":{
+      "test-ui":"jasmine ui",
+      "build-ui":"tsc -p ui.tsconfig.json",
+      "lint-ui":"cd ui && npm run lint",
+      "test-backend":"jasmine backend",
+      "build-backend":"tsc -p backend.tsconfig.json",
+      "lint-backend":"cd backend && npm run lint",
+      ...
+    }
+  }
 ```
 
 ## Develop & Contribute
