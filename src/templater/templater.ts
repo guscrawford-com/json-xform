@@ -7,6 +7,7 @@ import { RemoveOperation } from "../operations/remove-operation";
 import { TemplaterConfig } from "./templater-config.interface";
 import { SortOperation } from "../operations/sort-operation";
 import { ExtendsOperation } from "../operations/extends-operation";
+import { ForEachOperation } from "../operations/foreach-operation";
 
 const AWOL = -1;
 
@@ -14,11 +15,12 @@ const AWOL = -1;
  * Map `Operation`s to object properites that are "directives" read (in order of mapping) by the `Templater`
  */
 const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
-    "@xform:import":(templater:Templater)=> new ExtendsOperation(templater),
-    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater),
+    "@xform:import":(templater:Templater)=> new ExtendsOperation(templater, true/*pass this template as scope*/),
     "@xform:extends":(templater:Templater)=> new ExtendsOperation(templater),
+    "@xform:foreach":(templater:Templater)=> new ForEachOperation(templater),
     "@xform:merge":(templater:Templater)=> new MergeOperation(templater),
-    "@xform:sort":(templater:Templater)=> new SortOperation(templater)
+    "@xform:sort":(templater:Templater)=> new SortOperation(templater),
+    "@xform:remove":(templater:Templater)=> new RemoveOperation(templater)
 };
 export class Templater {
 
@@ -64,10 +66,6 @@ export class Templater {
         Object.keys(directives).sort(
             (a,b)=>operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
         ).forEach((key:string)=>directivesInOperationOrder[key]=directives[key]);
-        if (directivesInOperationOrder["@xform:import"]) {
-            result["@xform:import"] = directivesInOperationOrder["@xform:import"];
-            delete directivesInOperationOrder["@xform:import"];
-        }
         return Object.assign(result, {
             ...target,
             ...directivesInOperationOrder
@@ -88,7 +86,7 @@ export class Templater {
         // Returns:
         const templatedGraph:{[key:string]:any}|Array<any> = graphIsArray?[]:{};
         for (let directiveOrProperty in templateGraph) {
-            let resultingKey = this.expression(directiveOrProperty, scope);
+            let resultingKey = this.expression(directiveOrProperty, scope, true/*throw an exception if this resolves to a non-string/number*/);
             let resultingValue; 
             switch (typeof (templateGraph as any)[directiveOrProperty]) {
                 case 'string':
@@ -102,7 +100,16 @@ export class Templater {
                 default: resultingValue = (templateGraph as any)[directiveOrProperty];
             }
             if (directiveOrProperty.startsWith("@xform:")) {
-                if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
+                if (directiveOrProperty.startsWith("@xform:foreach")) {
+                    let forEachOperation = OPERATION_MAP["@xform:foreach"](this);
+                    let forEachResult = forEachOperation.run(
+                        [
+                            templatedGraph, 
+                            (templateGraph as any)[directiveOrProperty],
+                            this.expression(`${this.config.scaffolding.syntax.open}${directiveOrProperty.replace(/\@xform\:/,'')}${this.config.scaffolding.syntax.close}`)
+                        ]
+                    );
+                } else if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
                     let operation = OPERATION_MAP[directiveOrProperty](this);
                     operation.run(
                         // Operation injections:
@@ -130,7 +137,7 @@ export class Templater {
     }
 
 
-    expression(exprString:string, scope?:{[key:string]:any}) {
+    expression(exprString:string, scope?:{[key:string]:any}, keyRestrict=false) {
         let result = exprString.split(
             this.config.scaffolding.syntax.close
         ).map(expr=>
@@ -139,7 +146,8 @@ export class Templater {
                 expr.indexOf(this.config.scaffolding.syntax.dontInfer)!==-1
                     ?`${expr}${this.config.scaffolding.syntax.close}`
                     :expr,
-                scope
+                scope,
+                keyRestrict
             )
         );
         let nonComposable = result.find(r=>typeof r !== 'string');
@@ -149,7 +157,7 @@ export class Templater {
         return result.join('');
     }
 
-    protected partialExpression(exprString:string, scope?:{[key:string]:any}) {
+    protected partialExpression(exprString:string, scope?:{[key:string]:any}, keyRestrict=false) {
         let expressionStart = exprString.indexOf(this.config.scaffolding.syntax.open);
         if (expressionStart === AWOL) expressionStart = exprString.indexOf(this.config.scaffolding.syntax.dontInfer);
         if (expressionStart !== AWOL) {
@@ -163,6 +171,8 @@ export class Templater {
                     ? `${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`
                     : filterResult
             );
+            if (keyRestrict && typeof result !== 'string' && typeof result !== 'number')
+                throw new Error(`syntax error in expression: "${exprString}" must resolve to a number or string\n\t${result?JSON.stringify(result):result}`);
             if (dontInfer) return result;
             return this.infer(result);
         }

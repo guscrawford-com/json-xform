@@ -38,11 +38,23 @@ export const DEFAULT_FILTERS = {
     foreach:(args:any[])=>{
         var templater:Templater = args[0];
         var set = args[1];
-        var output = [];
+        if (typeof set !== 'object') return;
+        var isArray = set instanceof Array;
+        var output = isArray ? [] : {};
         var length = (set instanceof Array ? set.length : (typeof set === 'object' ? Object.keys(set).length : set.length));
         var index = 0;
+
         for (var key in set) {
-            output.push(templater.parse(set[key],{...templater.template, length, index, key}));
+            let keyInSetIsArray = set[key] instanceof Array;
+            switch (typeof set[key]) {
+                case 'object':
+                    if (keyInSetIsArray) (output as any[]).push(templater.parse(set[key],{...templater.template,length, index, key}));
+                    else (output as {[key:string]:any})[key] = (templater.parse(set[key],{...templater.template,length, index, key}));
+                    break;
+                default:
+                    if (keyInSetIsArray) (output as any[]).push(templater.expression(set[key],{...templater.template,length, index, key}));
+                    else (output as {[key:string]:any})[key] = (templater.expression(set[key],{...templater.template,length, index, key}));
+            }
             index ++;
         };
         return output;

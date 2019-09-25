@@ -1,6 +1,6 @@
 {
   "name": "@guscrawford.com/json-xform",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A json transformer",
   "main": "bin/json-xform.js",
   "types": "lib/json-xform.d.ts",
