@@ -19,7 +19,7 @@ Use `@xform:var` to define blocks of variables you can scope; use filters to man
 *`@{<ref>}` suppresses auto-inference (forcing the `number-a` example property to be a string interpretation), use `number` filter to force string values to numerics.*
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:var":{
     "something":"this",
@@ -47,7 +47,7 @@ new Templater({
 Sort your JSON
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:sort":{
     "values":"desc",
@@ -80,7 +80,7 @@ new Templater({
 Merge deep; masking structures on to others.
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:merge":{
     "compilerOptions":{
@@ -117,7 +117,7 @@ new Templater({
 Remove items from JSON
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:remove":{
     "scripts":{
@@ -147,7 +147,7 @@ Use inline "filters" like `if(<js-like-falsy-truthy-conditional>,<resolve-true>,
 *See other filters `lt`, `gte`, `lte`, `not`, `number` for further filtering references...*
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:var":{
     "production":true,
@@ -177,7 +177,7 @@ Use the `@xform:foreach(<iterable-var-reference>)` directive to repeat portions 
 *Where the value of each item in the iterable is referencable by `item`; each numerical index if available is `index` and `key` is always the key or stringified index*
 
 ```
-const Templater = require('@guscrawford.com/json-xform);
+const {Templater} = require('@guscrawford.com/json-xform);
 new Templater({
   "@xform:var":{
     "sub-apps":["ui","backend","etc"]
@@ -197,15 +197,13 @@ new Templater({
 ```
 {
   "scripts":{
-    "@xform:foreach(sub-apps)":{
-      "test-ui":"jasmine ui",
-      "build-ui":"tsc -p ui.tsconfig.json",
-      "lint-ui":"cd ui && npm run lint",
-      "test-backend":"jasmine backend",
-      "build-backend":"tsc -p backend.tsconfig.json",
-      "lint-backend":"cd backend && npm run lint",
-      ...
-    }
+    "test-ui":"jasmine ui",
+    "build-ui":"tsc -p ui.tsconfig.json",
+    "lint-ui":"cd ui && npm run lint",
+    "test-backend":"jasmine backend",
+    "build-backend":"tsc -p backend.tsconfig.json",
+    "lint-backend":"cd backend && npm run lint",
+    ...
   }
 ```
 
