@@ -59,7 +59,33 @@ describe('With Ad-hoc Complexity',()=>{
             ).parse();
             expect((result as any).objA.nested).toBe('A');
         });
-
+        it('foreach works',()=>{
+            let result = new Templater(
+                {
+                    "@xform:var":{
+                        "a":"A",
+                        "set": ["${a}","@{key}","@{index}"],
+                        "setB":{"name-1":"thing-1 \"${key}\"","name-2":"thing B (${index})"},
+                        "setC":[
+                            {"what":"now"}
+                        ],
+                        "script-names":["build","test"],
+                        "scripts":"${foreach(script-names)}"
+                    },
+                    scripts:{
+                        "@xform:foreach(script-names)":{
+                            "run:${item}":"tsc -c ${item}"
+                        }
+                    },
+                    set:"${foreach(set)}",
+                    setB:"${foreach(setB)}",
+                    setC:"${foreach(setC)}",
+                    //"${foreach(setB)}":"expectip"
+                } as any
+            ).parse();
+            console.log(result)
+            expect((result as any).set[0]).toBe('A');
+        });
         it('merges',()=>{
             let result = templater.parse();
             expect((result as any).stanza.a).toBe('A');
@@ -69,6 +95,19 @@ describe('With Ad-hoc Complexity',()=>{
             expect((result as any).merge.super.deep).toBe('deeper-yet');
         });
         it('evalues expressions, then merges',()=>{
+            expect(new Templater({
+                "@xform:var":{
+                  "production":true,
+                  "development":false,
+                  "build-prod":"ng build --prod",
+                  "build-dev":"ng build"
+                },
+                "scripts":{
+                  "build":"${if(gt(production,development),build-prod,build-dev)}"
+                }
+              }).parse()).toEqual({
+                "scripts":{"build":"ng build --prod"}
+              });
             let result = templater.parse();
             expect((result as any).scripts['new-build']).toBe('new-tsc');
             expect((result as any)["@xform:merge"]).toBeUndefined();
