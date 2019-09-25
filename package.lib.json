@@ -1,4 +1,5 @@
 {
+  "@xform:import":"package.json",
   "name": "@guscrawford.com/json-xform",
   "version": "1.5.0",
   "description": "A json transformer",
