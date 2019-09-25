@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export class ExtendsOperation extends Operation {
-    constructor (protected templater:Templater) {
+    constructor (protected templater:Templater, protected importMode=false) {
         super (templater);
     }
     run(args:any[]) {
@@ -21,20 +21,23 @@ export class ExtendsOperation extends Operation {
             }
         }
          */
-        if (typeof extentsions === 'string') ExtendsOperation.extend(target, join(templater.workingDirectory,extentsions), this.templater);
+        if (typeof extentsions === 'string') ExtendsOperation.extend(target, join(templater.workingDirectory,extentsions), this.templater, this.importMode);
         else for (let extension in extentsions) {
             var extensionPath = extentsions[extension];
-            (function(extensionPath:string, templater:Templater){
-                ExtendsOperation.extend(target, join(templater.workingDirectory,extensionPath), templater);
-            })(extensionPath, this.templater);
+            (function(extensionPath:string, templater:Templater, importMode:boolean){
+                ExtendsOperation.extend(target, join(templater.workingDirectory,extensionPath), templater, importMode);
+            })(extensionPath, this.templater, this.importMode);
         }
         //console.info(target)
     }
-    public static extend(target:any, pathRef:string, templater:Templater) {
-        var source, parsed;
+    public static extend(target:any, pathRef:string, templater:Templater, importMode:boolean) {
+        var source, fromJson, parsed;
         try {
             source = `${readFileSync(pathRef)}`;
-            parsed = new Templater(JSON.parse(source), templater.config, templater.workingDirectory).parse();
+            fromJson = JSON.parse(source);
+            if (importMode)
+                parsed = new Templater(fromJson, templater.config, templater.workingDirectory).parse();
+            else parsed = new Templater(fromJson, templater.config, templater.workingDirectory).parse(fromJson, {...fromJson, ...templater.template})
         }
         catch (err) {
             console.warn(err);

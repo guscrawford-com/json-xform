@@ -1,8 +1,10 @@
 {
-  "name": "@guscrawford.com/json-xform",
-  "version": "1.5.0",
-  "description": "A json transformer",
+  "@xform:import":"./package.json",
   "main": "bin/json-xform.js",
   "types": "lib/json-xform.d.ts",
-  "license": "MIT"
+  "@xform:remove":[
+    "devDependencies",
+    "scripts"
+  ]
 }
+

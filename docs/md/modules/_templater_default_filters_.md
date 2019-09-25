@@ -16,13 +16,13 @@
 
 ### ▪ **DEFAULT_FILTERS**: *object*
 
-*Defined in [templater/default-filters.ts:3](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L3)*
+*Defined in [templater/default-filters.ts:3](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L3)*
 
 ###  compare
 
 ▸ **compare**(`args`: *any[]*): *`1` | `-1` | `0`*
 
-*Defined in [templater/default-filters.ts:4](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L4)*
+*Defined in [templater/default-filters.ts:4](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L4)*
 
 **Parameters:**
 
@@ -36,7 +36,7 @@ Name | Type |
 
 ▸ **eq**(`args`: *any[]*): *boolean*
 
-*Defined in [templater/default-filters.ts:17](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L17)*
+*Defined in [templater/default-filters.ts:17](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L17)*
 
 **Parameters:**
 
@@ -48,9 +48,9 @@ Name | Type |
 
 ###  foreach
 
-▸ **foreach**(`args`: *any[]*): *any[]*
+▸ **foreach**(`args`: *any[]*): *undefined | object*
 
-*Defined in [templater/default-filters.ts:38](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L38)*
+*Defined in [templater/default-filters.ts:38](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L38)*
 
 **Parameters:**
 
@@ -58,13 +58,13 @@ Name | Type |
 ------ | ------ |
 `args` | any[] |
 
-**Returns:** *any[]*
+**Returns:** *undefined | object*
 
 ###  gt
 
 ▸ **gt**(`args`: *any[]*): *boolean*
 
-*Defined in [templater/default-filters.ts:19](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L19)*
+*Defined in [templater/default-filters.ts:19](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L19)*
 
 **Parameters:**
 
@@ -78,7 +78,7 @@ Name | Type |
 
 ▸ **if**(`args`: *any[]*): *any*
 
-*Defined in [templater/default-filters.ts:29](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L29)*
+*Defined in [templater/default-filters.ts:29](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L29)*
 
 **Parameters:**
 
@@ -92,7 +92,7 @@ Name | Type |
 
 ▸ **lt**(`args`: *any[]*): *boolean*
 
-*Defined in [templater/default-filters.ts:18](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L18)*
+*Defined in [templater/default-filters.ts:18](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L18)*
 
 **Parameters:**
 
@@ -106,7 +106,7 @@ Name | Type |
 
 ▸ **not**(`args`: *any[]*): *boolean*
 
-*Defined in [templater/default-filters.ts:26](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L26)*
+*Defined in [templater/default-filters.ts:26](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L26)*
 
 **Parameters:**
 
@@ -120,7 +120,7 @@ Name | Type |
 
 ▸ **number**(`args`: *any[]*): *number*
 
-*Defined in [templater/default-filters.ts:20](https://github.com/guscrawford-com/json-xform/blob/344182c/src/templater/default-filters.ts#L20)*
+*Defined in [templater/default-filters.ts:20](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-filters.ts#L20)*
 
 **Parameters:**
 
