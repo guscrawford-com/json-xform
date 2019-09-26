@@ -83,7 +83,7 @@ describe('With Ad-hoc Complexity',()=>{
                     //"${foreach(setB)}":"expectip"
                 } as any
             ).parse();
-            console.log(result)
+            // console.log(result)
             expect((result as any).set[0]).toBe('A');
         });
         it('merges',()=>{
@@ -95,20 +95,25 @@ describe('With Ad-hoc Complexity',()=>{
             expect((result as any).merge.super.deep).toBe('deeper-yet');
         });
         it('evalues expressions, then merges',()=>{
-            expect(new Templater({
+            let res;
+            expect(res = new Templater({
                 "@xform:var":{
                   "production":true,
                   "development":false,
+                  "another":"uat",
+                  "${another}":"${another} one",
                   "build-prod":"ng build --prod",
                   "build-dev":"ng build"
                 },
                 "scripts":{
-                  "build":"${if(gt(production,development),build-prod,build-dev)}"
+                  "build":"${if(gt(production,development),build-prod,build-dev)}",
+                  "other":"${uat}"
                 }
               }).parse()).toEqual({
-                "scripts":{"build":"ng build --prod"}
+                "scripts":{"build":"ng build --prod","other":"uat one"}
               });
             let result = templater.parse();
+            // console.log(res);
             expect((result as any).scripts['new-build']).toBe('new-tsc');
             expect((result as any)["@xform:merge"]).toBeUndefined();
         });
