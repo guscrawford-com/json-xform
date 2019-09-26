@@ -24,6 +24,7 @@ const OPERATION_MAP : {[key:string]:(templater:Templater)=>Operation} = {
 };
 export class Templater {
 
+    public variables: {[key:string]:any} = {};
     /**
      * 
      * @param template A root object to look for `@xform:*` directive-properties on; and tranform accordingly
@@ -56,7 +57,7 @@ export class Templater {
         const operationsInOrder = Object.keys(OPERATION_MAP);
         let directives:{[key:string]:any} = {}, target = {}, directivesInOperationOrder:{[key:string]:any} = {};
         let result:{[key:string]:any} = {};
-        Object.keys(templateGraph).forEach(
+        Object.keys(templateGraph).filter(key=>key!=='@xform:var').forEach(
             key=>(
                 key.startsWith("@xform:")
                     ? directives
@@ -66,6 +67,8 @@ export class Templater {
         Object.keys(directives).sort(
             (a,b)=>operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
         ).forEach((key:string)=>directivesInOperationOrder[key]=directives[key]);
+        if (templateGraph["@xform:var"])
+            result["@xform:var"] = templateGraph["@xform:var"];
         return Object.assign(result, {
             ...target,
             ...directivesInOperationOrder
@@ -107,6 +110,18 @@ export class Templater {
                             templatedGraph, 
                             (templateGraph as any)[directiveOrProperty],
                             this.expression(`${this.config.scaffolding.syntax.open}${directiveOrProperty.replace(/\@xform\:/,'')}${this.config.scaffolding.syntax.close}`)
+                        ]
+                    );
+                } else if (root && directiveOrProperty === "@xform:var") {
+                    OPERATION_MAP["@xform:merge"](this).run(
+                        // Operation injections:
+                        [
+                            // target:
+                            this.template[directiveOrProperty],
+                            // args:
+                            resultingValue,
+                            // scope
+                            scope || templateGraph
                         ]
                     );
                 } else if (typeof OPERATION_MAP[directiveOrProperty] === 'function') {
