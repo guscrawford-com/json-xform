@@ -22,4 +22,5 @@
 * ["templater/templater-config.interface"](modules/_templater_templater_config_interface_.md)
 * ["templater/templater.spec"](modules/_templater_templater_spec_.md)
 * ["tests/evaluates-expressions-and-merges.spec"](modules/_tests_evaluates_expressions_and_merges_spec_.md)
+* ["tests/foreach-tests.spec"](modules/_tests_foreach_tests_spec_.md)
 * ["tests/pass-through-static-properties.spec"](modules/_tests_pass_through_static_properties_spec_.md)

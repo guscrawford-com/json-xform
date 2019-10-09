@@ -34,7 +34,7 @@
 
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
-*Defined in [operations/sort-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/operations/sort-operation.ts#L4)*
+*Defined in [operations/sort-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/sort-operation.ts#L4)*
 
 **Parameters:**
 
@@ -52,7 +52,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
-*Defined in [operations/sort-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/operations/sort-operation.ts#L5)*
+*Defined in [operations/sort-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/sort-operation.ts#L5)*
 
 ## Methods
 
@@ -60,7 +60,7 @@ Name | Type |
 
 ▸ **doSort**(`objectOrArray`: *object | any[]*, `sortOnRefs`: *string[]*, `asc`: *boolean*): *object*
 
-*Defined in [operations/sort-operation.ts:35](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/operations/sort-operation.ts#L35)*
+*Defined in [operations/sort-operation.ts:35](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/sort-operation.ts#L35)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
-*Defined in [operations/sort-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/operations/sort-operation.ts#L8)*
+*Defined in [operations/sort-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/sort-operation.ts#L8)*
 
 **Parameters:**
 
@@ -96,7 +96,7 @@ ___
 
 ▸ **sortByRef**(`sorting`: *any*, `sortOnRefs`: *string[]*): *any*
 
-*Defined in [operations/sort-operation.ts:75](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/operations/sort-operation.ts#L75)*
+*Defined in [operations/sort-operation.ts:75](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/sort-operation.ts#L75)*
 
 **Parameters:**
 
