@@ -116,6 +116,54 @@ describe('With Ad-hoc Complexity',()=>{
             // console.log(res);
             expect((result as any).scripts['new-build']).toBe('new-tsc');
             expect((result as any)["@xform:merge"]).toBeUndefined();
+
+            expect(
+              new Templater({
+                "@xform:extends":"./sample.json",
+                "@xform:var":{
+                  "needed-value":"some-value"
+                },
+                "scripts":{
+                  "run":"command"
+                }
+              }).parse()
+            ).toEqual({
+                scripts: { run: 'command' },
+                'extended-properties': 'work well',
+                '@but not these': '@cus of things',
+                name: '@guscrawford.com/json-xform',
+                version: '1.4.0',
+                description: 'A json transformer',
+                main: 'src/json-xform.ts',
+                license: 'MIT',
+                repository: 'https://github.com/guscrawford-com/json-xform',
+                keywords: [ 'JSON', 'transform', 'template', 'static' ],
+                so: 'do some-value' }
+            );
+
+            expect(
+                new Templater({
+                  "@xform:import":"./sample.json",
+                  "@xform:var":{
+                    "needed-value":"some-value"
+                  },
+                  "scripts":{
+                    "run":"command"
+                  }
+                }).parse()
+              ).toEqual({
+                  scripts: { run: 'command' },
+                  'extended-properties': 'work well',
+                  '@but not these': '@cus of things',
+                  name: '@guscrawford.com/json-xform',
+                  version: '1.4.0',
+                  description: 'A json transformer',
+                  main: 'src/json-xform.ts',
+                  license: 'MIT',
+                  repository: 'https://github.com/guscrawford-com/json-xform',
+                  keywords: [ 'JSON', 'transform', 'template', 'static' ],
+                  so: 'do not' }
+              );
         });
     });
 });
