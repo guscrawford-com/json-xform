@@ -77,3 +77,16 @@ Also adds experimental "extends" support
 #### @extends
 
 Tests and readies `@xform:extends` directive
+
+----
+
+## 1.5.2
+### Oct 9 2019
+#### @extends
+
+Smarter variable contexts:
+ - Variables can reference other variables during initialization
+ - Added a `deref` filter for template-time reference to variables by other variables
+ - No longer outputs evaulates `undefined` variables as `'undefined'` and returns the original expression (in case it's designed to reflect an environment variable)
+
+`@xform:foreach` was fixed so that the atomic result of an iteration can be an object
