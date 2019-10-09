@@ -34,7 +34,7 @@
 
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
-*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/extends-operation.ts#L7)*
+*Defined in [operations/extends-operation.ts:7](https://github.com/guscrawford-com/json-xform/blob/055a393/src/operations/extends-operation.ts#L7)*
 
 **Parameters:**
 
@@ -51,7 +51,7 @@ Name | Type | Default |
 
 • **importMode**: *boolean*
 
-*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/extends-operation.ts#L8)*
+*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/055a393/src/operations/extends-operation.ts#L8)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
-*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/extends-operation.ts#L8)*
+*Defined in [operations/extends-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/055a393/src/operations/extends-operation.ts#L8)*
 
 ## Methods
 
@@ -71,7 +71,7 @@ ___
 
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
-*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/extends-operation.ts#L11)*
+*Defined in [operations/extends-operation.ts:11](https://github.com/guscrawford-com/json-xform/blob/055a393/src/operations/extends-operation.ts#L11)*
 
 **Parameters:**
 
@@ -87,7 +87,7 @@ ___
 
 ▸ **extend**(`target`: *any*, `pathRef`: *string*, `templater`: *[Templater](_templater_templater_.templater.md)*, `importMode`: *boolean*): *void*
 
-*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/extends-operation.ts#L33)*
+*Defined in [operations/extends-operation.ts:33](https://github.com/guscrawford-com/json-xform/blob/055a393/src/operations/extends-operation.ts#L33)*
 
 **Parameters:**
 
