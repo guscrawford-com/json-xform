@@ -74,8 +74,12 @@ describe('With Ad-hoc Complexity',()=>{
                     },
                     scripts:{
                         "@xform:foreach(script-names)":{
-                            "run:${item}":"tsc -c ${item}"
-                        }
+                            "run:${item}":"tsc -c ${item}",
+                            "not-thought-of:${key}":{
+                                "do":"${key}"
+                            }
+                        },
+                        "not-there":"${should-remain}"
                     },
                     set:"${foreach(set)}",
                     setB:"${foreach(setB)}",
@@ -83,8 +87,10 @@ describe('With Ad-hoc Complexity',()=>{
                     //"${foreach(setB)}":"expectip"
                 } as any
             ).parse();
-            // console.log(result)
+            console.log(result)
             expect((result as any).set[0]).toBe('A');
+            expect((result as any).scripts['not-thought-of:1'].do).toBe(1);
+            expect((result as any).scripts['not-there']).toBe('${should-remain}');
         });
         it('merges',()=>{
             let result = templater.parse();

@@ -24,7 +24,7 @@ export class ForEachOperation extends Operation {
                 let lastRef = refs.slice(refs.length > 1 ?refs.length-2:0).pop() as string;
                 typeof mergeTarget[lastRef] === 'object' && typeof merges[mergeOn] === 'object'
                     ? MergeOperation.deepMerge(mergeTarget[lastRef], this.templater.parse(merges[mergeOn], innerScope))
-                    : mergeTarget[lastRef] = this.templater.expression(merges[mergeOn], innerScope);
+                    : mergeTarget[lastRef] = typeof merges[mergeOn] === 'object'?this.templater.parse(merges[mergeOn], innerScope):this.templater.expression(merges[mergeOn], innerScope);
             }
         }
     }
