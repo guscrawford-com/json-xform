@@ -87,7 +87,7 @@ describe('With Ad-hoc Complexity',()=>{
                     //"${foreach(setB)}":"expectip"
                 } as any
             ).parse();
-            console.log(result)
+            //console.log(result)
             expect((result as any).set[0]).toBe('A');
             expect((result as any).scripts['not-thought-of:1'].do).toBe(1);
             expect((result as any).scripts['not-there']).toBe('${should-remain}');
@@ -138,6 +138,7 @@ describe('With Ad-hoc Complexity',()=>{
                 'extended-properties': 'work well',
                 '@but not these': '@cus of things',
                 name: '@guscrawford.com/json-xform',
+                "overridden-properties":"argggg",
                 version: '1.4.0',
                 description: 'A json transformer',
                 main: 'src/json-xform.ts',
@@ -155,11 +156,13 @@ describe('With Ad-hoc Complexity',()=>{
                   },
                   "scripts":{
                     "run":"command"
-                  }
+                  },
+                  "overridden-properties":"work well too"
                 }).parse()
               ).toEqual({
                   scripts: { run: 'command' },
                   'extended-properties': 'work well',
+                  "overridden-properties":"work well too",
                   '@but not these': '@cus of things',
                   name: '@guscrawford.com/json-xform',
                   version: '1.4.0',

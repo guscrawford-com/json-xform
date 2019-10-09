@@ -47,14 +47,15 @@ export class Templater {
     }
 
     /**
-     * Move all `@xform:*` directive-propterties to the top of the graph; in order of mapping
+     * Move most `@xform:*` directive-propterties to the bottom of the graph; in order of mapping
      * @param templateGraph a graph on the template object
      */
     protected anchorDirectives(templateGraph:Template|Array<any>) {
         if (templateGraph instanceof Array) return templateGraph;
         // console.info('before')
         // console.info(templateGraph)
-        const operationsInOrder = Object.keys(OPERATION_MAP);
+        const firstClassOperations = ['@xform:var','@xform:import','@xform:extends'];
+        const operationsInOrder = Object.keys(OPERATION_MAP).filter(k=>!firstClassOperations.find(f=>f===k));
         let directives:{[key:string]:any} = {}, target = {}, directivesInOperationOrder:{[key:string]:any} = {};
         let result:{[key:string]:any} = {};
         Object.keys(templateGraph).filter(key=>key!=='@xform:var').forEach(
@@ -67,8 +68,10 @@ export class Templater {
         Object.keys(directives).sort(
             (a,b)=>operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
         ).forEach((key:string)=>directivesInOperationOrder[key]=directives[key]);
-        if (templateGraph["@xform:var"])
-            result["@xform:var"] = templateGraph["@xform:var"];
+        firstClassOperations.forEach(opr=>{
+            if (templateGraph[opr])
+                result[opr] = templateGraph[opr];
+        });
         return Object.assign(result, {
             ...target,
             ...directivesInOperationOrder
