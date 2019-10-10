@@ -39,8 +39,10 @@ export class ExtendsOperation extends Operation {
                 parsed = new Templater(fromJson, templater.config, templater.workingDirectory).parse();
             else {
                 if (fromJson["@xform:var"])
-                    MergeOperation.deepMerge(fromJson["@xform:var"], (templater.config as any)["@xform:var"]||{})
-                parsed = new Templater(fromJson, templater.config, templater.workingDirectory).parse(fromJson)
+                    MergeOperation.deepMerge(fromJson["@xform:var"], (templater.template as any)["@xform:var"]||{});
+                else if ((templater.config as any)["@xform:var"])
+                    fromJson["@xform:var"] = (templater.config as any)["@xform:var"]
+                parsed = new Templater(fromJson, templater.config, templater.workingDirectory).parse();
             }
         }
         catch (err) {

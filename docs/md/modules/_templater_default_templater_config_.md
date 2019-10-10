@@ -16,21 +16,23 @@
 
 ### ▪ **DEFAULT_TEMPLATE_CONFIG**: *object*
 
-*Defined in [templater/default-templater-config.ts:4](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-templater-config.ts#L4)*
+*Defined in [templater/default-templater-config.ts:4](https://github.com/guscrawford-com/json-xform/blob/055a393/src/templater/default-templater-config.ts#L4)*
 
 ###  filters
 
 • **filters**: *object* =  DEFAULT_FILTERS
 
-*Defined in [templater/default-templater-config.ts:29](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-templater-config.ts#L29)*
+*Defined in [templater/default-templater-config.ts:29](https://github.com/guscrawford-com/json-xform/blob/055a393/src/templater/default-templater-config.ts#L29)*
 
 #### Type declaration:
 
 * **compare**(`args`: *any[]*): *`1` | `-1` | `0`*
 
+* **deref**(`args`: *any[]*): *any*
+
 * **eq**(`args`: *any[]*): *boolean*
 
-* **foreach**(`args`: *any[]*): *undefined | object*
+* **foreach**(`args`: *any[]*): *any*
 
 * **gt**(`args`: *any[]*): *boolean*
 
@@ -44,7 +46,7 @@
 
 ▪ **operations**: *object*
 
-*Defined in [templater/default-templater-config.ts:20](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-templater-config.ts#L20)*
+*Defined in [templater/default-templater-config.ts:20](https://github.com/guscrawford-com/json-xform/blob/055a393/src/templater/default-templater-config.ts#L20)*
 
 * **sort**: *object*
 
@@ -58,7 +60,7 @@
 
 ▪ **scaffolding**: *object*
 
-*Defined in [templater/default-templater-config.ts:5](https://github.com/guscrawford-com/json-xform/blob/ca23d54/src/templater/default-templater-config.ts#L5)*
+*Defined in [templater/default-templater-config.ts:5](https://github.com/guscrawford-com/json-xform/blob/055a393/src/templater/default-templater-config.ts#L5)*
 
 * **syntax**: *object*
 

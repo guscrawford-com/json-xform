@@ -35,28 +35,38 @@ export const DEFAULT_FILTERS = {
                 : exprB
         );
     },
+    // Does this not just need to return the enumerable?
     foreach:(args:any[])=>{
         var templater:Templater = args[0];
         var set = args[1];
-        if (typeof set !== 'object') return;
-        var isArray = set instanceof Array;
-        var output = isArray ? [] : {};
-        var length = (set instanceof Array ? set.length : (typeof set === 'object' ? Object.keys(set).length : set.length));
-        var index = 0;
+        if (typeof set !== 'object') return [];
+        return set;
+        // var isArray = set instanceof Array;
+        // var output = isArray ? [] : {};
+        // var length = (set instanceof Array ? set.length : (typeof set === 'object' ? Object.keys(set).length : set.length));
+        // var index = 0;
 
-        for (var key in set) {
-            let keyInSetIsArray = set[key] instanceof Array;
-            switch (typeof set[key]) {
-                case 'object':
-                    if (keyInSetIsArray) (output as any[]).push(templater.parse(set[key],{...templater.template,length, index, key}));
-                    else (output as {[key:string]:any})[key] = (templater.parse(set[key],{...templater.template,length, index, key}));
-                    break;
-                default:
-                    if (keyInSetIsArray) (output as any[]).push(templater.expression(set[key],{...templater.template,length, index, key}));
-                    else (output as {[key:string]:any})[key] = (templater.expression(set[key],{...templater.template,length, index, key}));
-            }
-            index ++;
-        };
-        return output;
+        // for (var key in set) {
+        //     let keyInSetIsArray = set[key] instanceof Array;
+        //     switch (typeof set[key]) {
+        //         case 'object':
+        //             if (keyInSetIsArray) (output as any[]).push(templater.parse(set[key],{...templater.template,length, index, key}));
+        //             else (output as {[key:string]:any})[key] = (templater.parse(set[key],{...templater.template,length, index, key}));
+        //             break;
+        //         default:
+        //             if (keyInSetIsArray) (output as any[]).push(templater.expression(set[key],{...templater.template,length, index, key}));
+        //             else (output as {[key:string]:any})[key] = (templater.expression(set[key],{...templater.template,length, index, key}));
+        //     }
+        //     index ++;
+        // };
+        // return output;
+    },
+    deref:(args:any[])=>{
+        var templater:Templater = args[0];
+        var objA = args[1];
+        var ref = args[2];
+        if (typeof ref !== 'string' && typeof ref !== 'number')
+            throw new Error(`run-time error evaluating filter "deref": reference expression resolved to non-key type '${typeof ref}'`);
+        return templater.reference(ref as any, objA)
     }
 }

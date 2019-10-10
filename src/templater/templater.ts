@@ -168,6 +168,7 @@ export class Templater {
         let nonComposable = result.find(r=>typeof r !== 'string');
         if (typeof nonComposable !== 'undefined') {
             return result.shift();
+        // console.info(nonComposable)
         }
         return result.join('');
     }
@@ -181,11 +182,17 @@ export class Templater {
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
             let filterResult = this.filter(rootExpr, scope);
+            // console.info(filterResult)
+            if (typeof filterResult === 'undefined') {
+                filterResult = `${this.config.scaffolding.syntax.open}${rootExpr}${this.config.scaffolding.syntax.close}`;
+                return filterResult;
+            }
             let result = (
                 typeof filterResult !== 'object'
                     ? `${exprString.substring(0, expressionStart)}${filterResult}${exprString.substring(expressionEnd+this.config.scaffolding.syntax.close.length)}`
                     : filterResult
             );
+            //if (typeof result === 'undefined') return exprString;
             if (keyRestrict && typeof result !== 'string' && typeof result !== 'number')
                 throw new Error(`syntax error in expression: "${exprString}" must resolve to a number or string\n\t${result?JSON.stringify(result):result}`);
             if (dontInfer) return result;
