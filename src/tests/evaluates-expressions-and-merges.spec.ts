@@ -174,5 +174,48 @@ describe('With Ad-hoc Complexity',()=>{
                   so: 'do not' }
               );
         });
+        it('makes a proxy-config.json',()=>{
+            expect(
+                new Templater({
+                    "@xform:var":{
+                      "container-endpoint":"10.131.67.131",
+                      "host-endpoint":"localhost",
+                      "services":{
+                          "ref":{ "container":true, "port":3000 },
+                          "thv":{ "container":true, "port":3001 },
+                          "intrep":{ "container":true, "port":3003 },
+                          "eventhub":{ "container":true, "port":3004 },
+                          "workflow_gateway":{ "container":true, "port":3005 },
+                          "workflow_request":{ "container":true, "port":3006 },
+                          "orc":{ "container":true, "port":3008 },
+                          "iam":{ "container":true, "port":3009 },
+                          "recon":{ "container":true, "port":3011 },
+                          "svc":{ "container":true, "port":3013 },
+                          "scheduler":{ "container":true, "port":5002 },
+                          "commonui":{ "container":true, "port":3024 },
+                          "crg":{ "container":false, "port":3027 }
+                      }
+                    },
+                    "@xform:foreach(services)":{
+                        "/api/${key}":{
+                          "target":"http://${if(item.container,container-endpoint,host-endpoint)}:${item.port}",
+                          "secure":"${if(item.secure)}",
+                          "pathRewrite":{
+                            "^/api/${key}":"/"
+                          }
+                        }
+                    },
+                    "/VFI/SSNC": {
+                      "target": "https://dvvarap4.ssnc.global/VisionFIEngOMEGA",
+                      "secure": true,
+                      "pathRewrite": {
+                        "^/VFI/SSNC": "/"
+                      }
+                    },
+                    "changeOrigin": true
+                  }
+                ).parse()
+            ).toEqual({})
+        })
     });
 });
