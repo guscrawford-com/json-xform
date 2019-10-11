@@ -185,7 +185,6 @@ export class Templater {
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
             let filterResult = this.filter(rootExpr, scope);
-            // console.info(filterResult)
             if (typeof filterResult === 'undefined') {
                 filterResult = `${this.config.scaffolding.syntax.open}${rootExpr}${this.config.scaffolding.syntax.close}`;
                 return filterResult;
@@ -209,7 +208,7 @@ export class Templater {
         if (scope) {
              scopeRef = Templater.deref(scope, expr, this.config.scaffolding.syntax.reference.delim);
         }
-        return scopeRef || Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
+        return typeof scopeRef !== 'undefined' ? scopeRef : Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
     }
 
     filter(expr:string, scope?:{[key:string]:any}):any {
