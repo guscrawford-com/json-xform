@@ -24,7 +24,7 @@
 
 • **AWOL**: *`-1`* =  -1
 
-*Defined in [templater/templater.ts:12](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L12)*
+*Defined in [templater/templater.ts:12](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L12)*
 
 ## Object literals
 
@@ -32,7 +32,7 @@
 
 ### ▪ **OPERATION_MAP**: *object*
 
-*Defined in [templater/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L17)*
+*Defined in [templater/templater.ts:17](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L17)*
 
 Map `Operation`s to object properites that are "directives" read (in order of mapping) by the `Templater`
 
@@ -40,7 +40,7 @@ Map `Operation`s to object properites that are "directives" read (in order of ma
 
 ▸ **@xform:extends**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[ExtendsOperation](../classes/_operations_extends_operation_.extendsoperation.md)*
 
-*Defined in [templater/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L19)*
+*Defined in [templater/templater.ts:19](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L19)*
 
 **Parameters:**
 
@@ -54,7 +54,7 @@ Name | Type |
 
 ▸ **@xform:foreach**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[ForEachOperation](../classes/_operations_foreach_operation_.foreachoperation.md)*
 
-*Defined in [templater/templater.ts:20](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L20)*
+*Defined in [templater/templater.ts:20](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L20)*
 
 **Parameters:**
 
@@ -68,7 +68,7 @@ Name | Type |
 
 ▸ **@xform:import**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[ExtendsOperation](../classes/_operations_extends_operation_.extendsoperation.md)*
 
-*Defined in [templater/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L18)*
+*Defined in [templater/templater.ts:18](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L18)*
 
 **Parameters:**
 
@@ -82,7 +82,7 @@ Name | Type |
 
 ▸ **@xform:merge**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[MergeOperation](../classes/_operations_merge_operation_.mergeoperation.md)*
 
-*Defined in [templater/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L21)*
+*Defined in [templater/templater.ts:21](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L21)*
 
 **Parameters:**
 
@@ -96,7 +96,7 @@ Name | Type |
 
 ▸ **@xform:remove**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[RemoveOperation](../classes/_operations_remove_operation_.removeoperation.md)*
 
-*Defined in [templater/templater.ts:23](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L23)*
+*Defined in [templater/templater.ts:23](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L23)*
 
 **Parameters:**
 
@@ -110,7 +110,7 @@ Name | Type |
 
 ▸ **@xform:sort**(`templater`: *[Templater](../classes/_templater_templater_.templater.md)*): *[SortOperation](../classes/_operations_sort_operation_.sortoperation.md)*
 
-*Defined in [templater/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/adb43d7/src/templater/templater.ts#L22)*
+*Defined in [templater/templater.ts:22](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/templater/templater.ts#L22)*
 
 **Parameters:**
 
