@@ -32,7 +32,7 @@
 
 *Overrides [Operation](_operations_operation_.operation.md).[constructor](_operations_operation_.operation.md#constructor)*
 
-*Defined in [operations/remove-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/operations/remove-operation.ts#L4)*
+*Defined in [operations/remove-operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/remove-operation.ts#L4)*
 
 **Parameters:**
 
@@ -50,7 +50,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[templater](_operations_operation_.operation.md#protected-templater)*
 
-*Defined in [operations/remove-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/operations/remove-operation.ts#L5)*
+*Defined in [operations/remove-operation.ts:5](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/remove-operation.ts#L5)*
 
 ## Methods
 
@@ -60,7 +60,7 @@ Name | Type |
 
 *Overrides [Operation](_operations_operation_.operation.md).[run](_operations_operation_.operation.md#abstract-run)*
 
-*Defined in [operations/remove-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/c9d079f/src/operations/remove-operation.ts#L8)*
+*Defined in [operations/remove-operation.ts:8](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/remove-operation.ts#L8)*
 
 **Parameters:**
 
