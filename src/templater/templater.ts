@@ -47,14 +47,15 @@ export class Templater {
     }
 
     /**
-     * Move all `@xform:*` directive-propterties to the top of the graph; in order of mapping
+     * Move most `@xform:*` directive-propterties to the bottom of the graph; in order of mapping
      * @param templateGraph a graph on the template object
      */
     protected anchorDirectives(templateGraph:Template|Array<any>) {
         if (templateGraph instanceof Array) return templateGraph;
         // console.info('before')
         // console.info(templateGraph)
-        const operationsInOrder = Object.keys(OPERATION_MAP);
+        const firstClassOperations = ['@xform:var','@xform:import','@xform:extends'];
+        const operationsInOrder = Object.keys(OPERATION_MAP).filter(k=>!firstClassOperations.find(f=>f===k));
         let directives:{[key:string]:any} = {}, target = {}, directivesInOperationOrder:{[key:string]:any} = {};
         let result:{[key:string]:any} = {};
         Object.keys(templateGraph).filter(key=>key!=='@xform:var').forEach(
@@ -67,8 +68,10 @@ export class Templater {
         Object.keys(directives).sort(
             (a,b)=>operationsInOrder.findIndex(o=>o===a)-operationsInOrder.findIndex(o=>o===b)
         ).forEach((key:string)=>directivesInOperationOrder[key]=directives[key]);
-        if (templateGraph["@xform:var"])
-            result["@xform:var"] = templateGraph["@xform:var"];
+        firstClassOperations.forEach(opr=>{
+            if (templateGraph[opr])
+                result[opr] = templateGraph[opr];
+        });
         return Object.assign(result, {
             ...target,
             ...directivesInOperationOrder
@@ -182,7 +185,6 @@ export class Templater {
             if (expressionEnd === AWOL) throw new Error(`syntax error in expression: "${this.config.scaffolding.syntax.close}" expected\n\t${exprString}`);
             let rootExpr = exprString.substring(expressionStart+this.config.scaffolding.syntax.open.length, expressionEnd).trim();
             let filterResult = this.filter(rootExpr, scope);
-            // console.info(filterResult)
             if (typeof filterResult === 'undefined') {
                 filterResult = `${this.config.scaffolding.syntax.open}${rootExpr}${this.config.scaffolding.syntax.close}`;
                 return filterResult;
@@ -206,7 +208,7 @@ export class Templater {
         if (scope) {
              scopeRef = Templater.deref(scope, expr, this.config.scaffolding.syntax.reference.delim);
         }
-        return scopeRef || Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
+        return typeof scopeRef !== 'undefined' ? scopeRef : Templater.deref(this.template["@xform:var"], expr, this.config.scaffolding.syntax.reference.delim);
     }
 
     filter(expr:string, scope?:{[key:string]:any}):any {

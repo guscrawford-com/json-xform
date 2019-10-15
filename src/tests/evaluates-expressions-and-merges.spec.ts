@@ -87,7 +87,7 @@ describe('With Ad-hoc Complexity',()=>{
                     //"${foreach(setB)}":"expectip"
                 } as any
             ).parse();
-            console.log(result)
+            //console.log(result)
             expect((result as any).set[0]).toBe('A');
             expect((result as any).scripts['not-thought-of:1'].do).toBe(1);
             expect((result as any).scripts['not-there']).toBe('${should-remain}');
@@ -138,6 +138,7 @@ describe('With Ad-hoc Complexity',()=>{
                 'extended-properties': 'work well',
                 '@but not these': '@cus of things',
                 name: '@guscrawford.com/json-xform',
+                "overridden-properties":"argggg",
                 version: '1.4.0',
                 description: 'A json transformer',
                 main: 'src/json-xform.ts',
@@ -155,11 +156,13 @@ describe('With Ad-hoc Complexity',()=>{
                   },
                   "scripts":{
                     "run":"command"
-                  }
+                  },
+                  "overridden-properties":"work well too"
                 }).parse()
               ).toEqual({
                   scripts: { run: 'command' },
                   'extended-properties': 'work well',
+                  "overridden-properties":"work well too",
                   '@but not these': '@cus of things',
                   name: '@guscrawford.com/json-xform',
                   version: '1.4.0',
@@ -171,5 +174,49 @@ describe('With Ad-hoc Complexity',()=>{
                   so: 'do not' }
               );
         });
+        it('makes a proxy-config.json',()=>{
+          let result = new Templater({
+            "@xform:var":{
+              "container-endpoint":"10.131.67.131",
+              "host-endpoint":"localhost",
+              "services":{
+                  "ref":{ "secure":false, "port":3000 },
+                  "thv":{ "secure":false, "port":3001 },
+                  "intrep":{ "secure":false, "port":3003 },
+                  "eventhub":{ "secure":true, "port":3004 },
+                  "workflow_gateway":{ "secure":false, "port":3005 },
+                  "workflow_request":{ "secure":false, "port":3006 },
+                  "orc":{ "secure":false, "port":3008 },
+                  "iam":{ "secure":false, "port":3009 },
+                  "recon":{ "secure":false, "port":3011 },
+                  "svc":{ "secure":false, "port":3013 },
+                  "scheduler":{ "secure":false, "port":5002 },
+                  "commonui":{ "secure":false, "port":3024 },
+                  "crg":{ "secure":true, "port":3027 }
+              }
+            },
+            "@xform:foreach(services)":{
+                "/api/${key}":{
+                  "target":"http://${if(item.container,container-endpoint,host-endpoint)}:${item.port}",
+                  "secure":"${item.secure}",
+                  "pathRewrite":{
+                    "^/api/${key}":"/"
+                  }
+                }
+            },
+            "/VFI/SSNC": {
+              "target": "https://dvvarap4.ssnc.global/VisionFIEngOMEGA",
+              "secure": true,
+              "pathRewrite": {
+                "^/VFI/SSNC": "/"
+              }
+            },
+            "changeOrigin": true
+          }).parse();
+          //console.log(result)
+          expect(
+              result['/api/ref']
+          ).toEqual({ target: 'http://localhost:3000', secure: false, pathRewrite: { '^/api/ref': '/' } })
+        })
     });
 });

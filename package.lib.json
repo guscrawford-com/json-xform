@@ -1,7 +1,9 @@
 {
   "@xform:import":"./package.json",
-  "main": "bin/json-xform.js",
-  "types": "lib/json-xform.d.ts",
+  "@xform:merge":{
+    "main": "bin/json-xform.js",
+    "types": "lib/json-xform.d.ts"
+  },
   "@xform:remove":[
     "devDependencies",
     "scripts"

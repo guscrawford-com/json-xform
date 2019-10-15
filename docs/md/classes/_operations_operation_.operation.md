@@ -38,7 +38,7 @@
 
 \+ **new Operation**(`templater`: *[Templater](_templater_templater_.templater.md)*): *[Operation](_operations_operation_.operation.md)*
 
-*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/operation.ts#L3)*
+*Defined in [operations/operation.ts:3](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/operation.ts#L3)*
 
 **Parameters:**
 
@@ -54,7 +54,7 @@ Name | Type |
 
 • **templater**: *[Templater](_templater_templater_.templater.md)*
 
-*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/operation.ts#L4)*
+*Defined in [operations/operation.ts:4](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/operation.ts#L4)*
 
 ## Methods
 
@@ -62,7 +62,7 @@ Name | Type |
 
 ▸ **run**(`args`: *any[]*): *any*
 
-*Defined in [operations/operation.ts:12](https://github.com/guscrawford-com/json-xform/blob/97f0b14/src/operations/operation.ts#L12)*
+*Defined in [operations/operation.ts:12](https://github.com/guscrawford-com/json-xform/blob/5ed8c18/src/operations/operation.ts#L12)*
 
 **Parameters:**
 
