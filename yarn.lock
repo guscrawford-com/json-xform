@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@guscrawford.com/json-xform@^1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@guscrawford.com/json-xform/-/json-xform-1.5.3.tgz#a9edb78a7a87024ea9a1ac152c38d8d1285379d8"
+  integrity sha512-86f3lbd6jDq/5dGmnxYezaGdK7fRssWzqGid4ST9inDWOe9Zo/qyhnJLn1T6slyC74ihSRLV4eMDH+VOygFjJw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

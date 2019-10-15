@@ -1,6 +1,7 @@
 {
   "@xform:var":{"needed-value":"not"},
   "extended-properties":"work well",
+  "overridden-properties":"argggg",
   "@but not these":"@cus of things",
   "name": "@guscrawford.com/json-xform",
   "version": "1.4.0",

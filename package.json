@@ -1,6 +1,6 @@
 {
   "name": "@guscrawford.com/json-xform",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "A json transformer",
   "main": "src/json-xform.ts",
   "license": "MIT",
@@ -12,6 +12,7 @@
     "static"
   ],
   "devDependencies": {
+    "@guscrawford.com/json-xform": "^1.5.3",
     "@types/jasmine": "^3.3.13",
     "@types/node": "8",
     "cpy-cli": "^2.0.0",
@@ -30,6 +31,8 @@
     "test": "rimraf test && tsc -p tsconfig.jasmine.json && yarn test:run",
     "test:run": "jasmine \"test/**/*[sS]pec.js\"",
     "package": "yarn build && yarn docs && cpy README.md dist && cpy CHANGELOG.md dist && xform package.lib.json > dist\\package.json",
+    "package:link": "yarn package && cd dist && (yarn unlink || echo ⚠ Not linked) && yarn link",
+    "package:unlink": "cd dist && (yarn unlink || echo ⚠ Not linked)",
     "release": "cd dist && yarn publish --access=public"
   }
 }
